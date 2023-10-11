@@ -6,7 +6,6 @@
   "scripts": {
     "start2": "node src/server.js --inspect",
     "start": "nodemon src/server.js",
-    "build": "netlify deploy --prod",
     "test": "jest"
   },
   "author": "clearlove7",
