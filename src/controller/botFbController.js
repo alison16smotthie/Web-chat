@@ -49,7 +49,7 @@ let handleMessage = (sender_psid, received_message) =>{
   }
 
   if(received_message.text==="#Tường"){
-      response = {"text": `${received_message.text} : Tường nick name Clearlove7 Profile : `,
+      response = {"text": `${received_message.text} : Tường nick name Clearlove7`,
       }
       console.log(response);
   }
