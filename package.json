@@ -5,7 +5,7 @@
   "main": "src/server.js",
   "scripts": {
     "start2": "node src/server.js --inspect",
-    "start": "nodemon src/server.js",
+    "start": "node src/server.js --inspect",
     "test": "jest"
   },
   "author": "clearlove7",
