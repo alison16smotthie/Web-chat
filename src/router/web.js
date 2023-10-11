@@ -10,7 +10,7 @@ let webInit = (app) => {
 
     app.get('/botfb', bot_facebook.index);
     app.get('/webhook', getWebhook)
-    router.post('/webhook', postWebhook);
+    app.post('/webhook', postWebhook);
     app.use('/chat', ChatRoute.Router());
     app.use('/', HomeRoute.Router());
 }
