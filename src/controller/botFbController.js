@@ -32,11 +32,16 @@ let handlePostback = (sender_psid, received_postback) =>{
     
     let payload = received_postback.payload;
 
-    if (payload === 'yes') {
-      response = { "text": "Cảm ơn!" }
-    } 
-    else if (payload === 'no') {
-      response = { "text": "ohhh, cảm ơn vì bạn đã nhận xét <: " }
+    switch (payload) {
+      case "no":
+        response = { "text": "Cảm ơn!" }
+      break;
+      case "yes":
+        response = { "text": "ohhh, cảm ơn vì bạn đã nhận xét <: " }
+      break;
+    
+      default:
+      break;
     }
     
     callSendAPI(sender_psid, response);
