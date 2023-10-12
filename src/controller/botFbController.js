@@ -193,8 +193,6 @@ let callSendAPI = (sender_psid, response)=> {
 
       "message": response
     }
-
-    
     
     request({
       //
