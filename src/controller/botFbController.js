@@ -62,7 +62,7 @@ let handleMessage = (sender_psid, received_message) =>{
         }
     }
 
-    if (received_message.text === "get") {    
+    if (received_message.text === "message") {    
         response = {
           "text": `${str}`,
         }
