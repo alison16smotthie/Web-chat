@@ -53,6 +53,31 @@ function clientGetUsers(users){
 }
 
 
+document.getElementById('sendButton').addEventListener('click', function(event) {
+    event.preventDefault();
+    
+    const msgInput = document.getElementById('msg');
+    const message = msgInput.value;
+    
+    fetch('/webhook', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ message: message })
+    })
+    .then(function(response) {
+    return response.json();
+    })
+    .then(function(data) {
+        console.log('Message sent!', data);
+    })
+    .catch(function(error) {
+        console.error('Unable to send message:', error);
+    });
+    
+    msgInput.value = '';
+});
 
 
 

@@ -140,13 +140,15 @@ let postWebhook = (req,res) =>{
 
     let body = req.body;
 
-    console.log(body);
-
     if (body.object === 'page') {
 
         body.entry.forEach(function(entry) {
 
-            console.log(entry);
+            console.table(entry);
+
+            console.log("_____________________________________________________");
+
+            console.table(entry.messaging);
 
             let webhook_event = entry.messaging[0];
 
