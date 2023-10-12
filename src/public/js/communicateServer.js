@@ -36,15 +36,7 @@ socket.on('coin',async coin => {
 });
 
 
-socket.on('encoding', key => {
 
-    socket.on(key, (...resource) => {
-
-        for (let i = 0; i < resource.length; i++) {
-            //console.log(resource[i]);
-        }
-    });    
-});
 
 
 

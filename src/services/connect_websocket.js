@@ -4,6 +4,8 @@ const {API} = require('./api.js');
 const {userJoin, getUsers, usersLeaveRoom, getRoomUsers} = require('../models/users.js');
 const {formatData} = require('./messages.js');
 const {bot} = require('./chatBot.js');
+require('dotenv').config();
+
 
 class Websocket_Connection{
 
@@ -116,8 +118,10 @@ class Websocket_Connection{
                 }
             }
             coin();
+
+            let access_token = {token:process.env.PAGE_ACCESS_TOKEN};
         
-            socket.emit('encoding', encoding.convertStringToHex1);
+            socket.emit('key_message', access_token);
            
            
             
