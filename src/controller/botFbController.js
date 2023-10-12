@@ -43,10 +43,26 @@ let handlePostback = (sender_psid, received_postback) =>{
 
 let handleMessage = (sender_psid, received_message) =>{
 
-    let response;        
-    if (received_message.text) {    
+    let data_msg = [];
+    let str = "";
+
+    data_msg.push(Websocket_Connection.autobot());
+
+    for (let i = 0; i < data_msg.length; i++) {
+        str+=data_msg[i]+" ";
+    }
+
+    let response;    
+    
+    if(received_message.text){
         response = {
-          "text": `${received_message.text} message webchat ${Websocket_Connection.autobot()}`,
+          "text": `${received_message.text}`,
+        }
+    }
+
+    if (received_message.text === "get") {    
+        response = {
+          "text": `${str}`,
         }
     }
 

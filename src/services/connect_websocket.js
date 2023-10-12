@@ -59,16 +59,17 @@ class Websocket_Connection{
             });
     
             socket.on('chatMessage', async msg => {
+
+                const user = getUsers(socket.id);
+
+                this.messageGet = `${guest} tại phòng ${user.room} vừa nhắn tin ${msg}`;
     
                 bot.findKeyChat().then(async () => {
             
                     const automatic = bot.handleAutoMsg(msg);
-
-                    this.messageGet = msg;
     
                     automatic.then(autoMsg => {
                 
-                        const user = getUsers(socket.id);
     
                         ++countMessages;
                         const obj_user = formatData(user.id, guest, msg, user.room, "sending", countUsers, countMessages, autoMsg);
