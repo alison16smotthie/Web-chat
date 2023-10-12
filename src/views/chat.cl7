@@ -27,7 +27,7 @@
   </main>
    <div class="chat-form-container">
     <form action="/webhook" method="POST" id="chat-form">
-    <input id="msg" type="text" placeholder="Enter Message" required />
+      <input id="text" type="text" placeholder="Enter Message" required />
     <button type="submit" class="btn" id="sendButton"><i class="fas fa-paper-plane"></i> Send</button>
    
   </form>
