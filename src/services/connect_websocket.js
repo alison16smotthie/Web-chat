@@ -13,8 +13,10 @@ class Websocket_Connection{
         this.role = null;
         this.countUsers = 0;
         this.countMessages = 0;
+        this.messageGet=null;
 
     }
+
 
     connectWebChat = (io) =>{
 
@@ -61,6 +63,8 @@ class Websocket_Connection{
                 bot.findKeyChat().then(async () => {
             
                     const automatic = bot.handleAutoMsg(msg);
+
+                    this.messageGet = msg;
     
                     automatic.then(autoMsg => {
                 
@@ -117,6 +121,11 @@ class Websocket_Connection{
            
             
         });
+    }
+
+    
+    autobot = ()=> {
+        return this.messageGet;
     }
 
 
