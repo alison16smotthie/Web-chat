@@ -4,6 +4,7 @@ const fs = require("fs");
 const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
 let VERIFY_TOKEN = process.env.VERIFY_TOKEN;
 const {Websocket_Connection} = require("../services/connect_websocket.js");
+const data_msg = [];
 
 class botFbController {
 
@@ -43,19 +44,15 @@ let handlePostback = (sender_psid, received_postback) =>{
 
 let handleMessage = (sender_psid, received_message) =>{
 
-    const data = [];
-    let data_msg = [];
+ 
     let str = "";
 
     data_msg.push(Websocket_Connection.GetMessages());
 
-    for (let i = 0; i < data_msg.length; i++) {
-        data.push(data_msg[i]);
-    }
 
-    for(let i = 0; i < data.length; i++) {
+    for(let i = 0; i < data_msg.length; i++) {
         
-        str+=data[i];
+        str+=data_msg[i];
     }
 
     let response;    
