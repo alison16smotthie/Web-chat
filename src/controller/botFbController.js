@@ -49,15 +49,7 @@ let handleMessage = (sender_psid, received_message) =>{
           "text": `${received_message.text}`,
         }
     }
-
-
-    // if(Websocket_Connection.autobot()!=null){
-    //   response = {
-    //     "text": `${Websocket_Connection.autobot()}`,
-    //   }
-    // }
-
-
+    
     if(received_message.text==="#Tường"){
         response = {"text": `${received_message.text} : Tường nick name Clearlove7`,
         }
@@ -114,6 +106,8 @@ let postWebhook = (req,res) =>{
           let sender_psid = webhook_event.sender.id;
 
           console.log('Sender PSID : ' + sender_psid);
+
+          console.log(Websocket_Connection.autobot());
 
           
           if (webhook_event.message) {
@@ -175,11 +169,7 @@ let callSendAPI = (sender_psid, response)=> {
       "message": response
     }
 
-    if (Websocket_Connection.autobot() != null) {    
-        response = {
-          "text": `${Websocket_Connection.autobot()}`,
-        }
-    }
+    
     
     request({
 
