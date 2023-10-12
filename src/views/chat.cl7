@@ -36,32 +36,6 @@
 <script>
 
 
-  document.getElementById('sendButton').addEventListener('click', function(event) {
-    event.preventDefault();
-    
-    const msgInput = document.getElementById('msg');
-    const message = msgInput.value;
-    
-    fetch('/webhook', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ object: "page" })
-    })
-      .then(function(response) {
-        return response.json();
-      })
-      .then(function(data) {
-        console.log('Message sent!', data);
-      })
-      .catch(function(error) {
-        console.error('Unable to send message:', error);
-      });
-    
-    msgInput.value = '';
-  });
-  
 </script>
 <script src="/socket.io/socket.io.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qs/6.11.1/qs.min.js" integrity="sha512-5Zv/hNtOKSkeScnIYOqGjng82gQSHsCoyqq9TgrJLgYa032cUYWH4kF1ayS8Gz1Jfge7e8MaBF6AeEvoQ92v8w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
