@@ -46,15 +46,10 @@ let handleMessage = (sender_psid, received_message) =>{
     let response;        
     if (received_message.text) {    
         response = {
-          "text": `${received_message.text}`,
+          "text": `${received_message.text} message webchat ${Websocket_Connection.autobot()}`,
         }
     }
 
-    if(Websocket_Connection.autobot()){
-        response = {
-          "text": `${Websocket_Connection.autobot()}`,
-        }
-    }
 
     if(received_message.text==="#Tường"){
         response = {"text": `${received_message.text} : Tường nick name Clearlove7`,
