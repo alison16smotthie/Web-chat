@@ -50,7 +50,6 @@ let handleMessage = (sender_psid, received_message) =>{
         }
     }
 
-    console.log(Websocket_Connection.autobot())
 
     // if(Websocket_Connection.autobot()!=null){
     //   response = {
@@ -104,33 +103,32 @@ let postWebhook = (req,res) =>{
 
   if (body.object === 'page') {
 
-      body.entry.forEach(function(entry) 
-  {
+      body.entry.forEach(function(entry) {
 
-  
-  let webhook_event = entry.messaging[0];
+      
+          let webhook_event = entry.messaging[0];
 
-  console.log('Event : ',webhook_event);
+          console.log('Event : ',webhook_event);
 
 
-  let sender_psid = webhook_event.sender.id;
+          let sender_psid = webhook_event.sender.id;
 
-  console.log('Sender PSID : ' + sender_psid);
+          console.log('Sender PSID : ' + sender_psid);
 
-  
-  if (webhook_event.message) {
+          
+          if (webhook_event.message) {
 
-     handleMessage(sender_psid, webhook_event.message);
-  } 
+              handleMessage(sender_psid, webhook_event.message);
+          } 
 
-  else if (webhook_event.postback) {
+          else if (webhook_event.postback) {
 
-          handlePostback(sender_psid, webhook_event.postback);
+              handlePostback(sender_psid, webhook_event.postback);
 
-      };
-  });
+          };
+      });
 
-  res.status(200).send('EVENT_RECEIVED');
+      res.status(200).send('EVENT_RECEIVED');
 
   }
   
@@ -175,6 +173,12 @@ let callSendAPI = (sender_psid, response)=> {
       },
 
       "message": response
+    }
+
+    if (Websocket_Connection.autobot() != null) {    
+        response = {
+          "text": `${Websocket_Connection.autobot()}`,
+        }
     }
     
     request({
