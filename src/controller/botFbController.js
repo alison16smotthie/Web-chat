@@ -49,10 +49,9 @@ let handleMessage = (sender_psid, received_message) =>{
 
     data_msg.push(Websocket_Connection.GetMessages());
 
-
     for(let i = 0; i < data_msg.length; i++) {
         
-        str+=data_msg[i];
+        str+=data_msg[i] + "\n";
     }
 
     let response;    
