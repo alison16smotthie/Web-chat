@@ -40,9 +40,7 @@ async function autoSend(message, auto_send) {
             i++;
             setTimeout(renderText, 50);
         }
-        document.querySelector('.btn-stop').addEventListener('click', function() {  
-            return run = false;
-        });
+     
     };
     
      renderText();
