@@ -29,10 +29,10 @@ socket.on('message',async message => {
 
 chatForm.addEventListener('submit', (e) => {
     e.preventDefault();
-    const msg = e.target.elements.msg.value;
+    const msg = e.target.elements.text.value;
     socket.emit('chatMessage',msg); 
-    e.target.elements.msg.value = ''; 
-    e.target.elements.msg.focus(); 
+    e.target.elements.text.value = ''; 
+    e.target.elements.text.focus(); 
     
 });
 
