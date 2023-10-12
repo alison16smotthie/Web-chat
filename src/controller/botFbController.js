@@ -146,7 +146,7 @@ let postWebhook = (req,res) =>{
 
             console.table(entry);
 
-            console.log("_____________________________________________________");
+            console.log("====================================================");
 
             console.table(entry.messaging);
 

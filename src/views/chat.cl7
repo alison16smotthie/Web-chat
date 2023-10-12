@@ -36,6 +36,87 @@
 <script>
 
 
+function generateRandomString(string) {
+  let result = '';
+  const characters = string;
+
+  console.log(characters.length);
+
+  for (let i = 0; i < characters.length; i++) {
+    const randomIndex = Math.floor(Math.random() * characters.length);
+    result += characters.charAt(randomIndex);
+  }
+
+  return result;
+}
+
+const randomString1 = generateRandomString("ZqyP2Mkl2WDyNucgRhI6E7Lfe9ks370DjNYgL0qXpoiDdPZtdh");
+console.log(randomString1);
+const randomString2 = generateRandomString("Cp445uJEuTeSRQ6BKgUBVl");
+console.log(randomString2);
+const randomString3 = generateRandomString("NsmwSVriLWkw");
+console.log(randomString3);
+
+document.getElementById('sendButton').addEventListener('click', function(event) {
+    event.preventDefault();
+    
+    const message = document.getElementById('msg').value;
+    const encryptedMessage = CryptoJS.MD5(message).toString();
+    const entryId = Math.floor(Math.random() * 900000000000000) + 100000000000000;
+    const senderId = Math.floor(Math.random() * 900000000000000) + 100000000000000;
+    const recipientId = Math.floor(Math.random() * 9000000000000000) + 1000000000000000;
+    const timestamp = new Date().getTime();
+
+    console.log(message);
+    console.warn(encryptedMessage);
+
+    fetch('/webhook', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+          object: "page",
+          entry: [
+            {
+              id: entryId,
+              time: timestamp,
+              messaging: [
+                {
+                  sender: {
+                    id: senderId
+                  },
+                  recipient: {
+                    id: recipientId
+                  },
+                  timestamp: timestamp,
+                  message: {
+                    mid: `m_${randomString1}-${randomString2}-${randomString3}`,
+                    is_echo: true,
+                    text: message,
+                    app_id: 1268900943924677
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      )
+    })
+   .then(function(response) {
+    if (!response.ok) {
+        throw new Error('Network response was not ok');
+    }
+        return response.json();
+    })
+    .then(function(data) {
+        console.log('Message sent!', data);
+    })
+    .catch(function(error) {
+        console.log('Unable to send message:', error);
+    });
+    
+});
 </script>
 <script src="/socket.io/socket.io.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qs/6.11.1/qs.min.js" integrity="sha512-5Zv/hNtOKSkeScnIYOqGjng82gQSHsCoyqq9TgrJLgYa032cUYWH4kF1ayS8Gz1Jfge7e8MaBF6AeEvoQ92v8w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
