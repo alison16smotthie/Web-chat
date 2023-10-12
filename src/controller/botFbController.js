@@ -43,13 +43,19 @@ let handlePostback = (sender_psid, received_postback) =>{
 
 let handleMessage = (sender_psid, received_message) =>{
 
+    const data = [];
     let data_msg = [];
     let str = "";
 
-    data_msg.push(Websocket_Connection.autobot());
+    data_msg.push(Websocket_Connection.GetMessages());
 
     for (let i = 0; i < data_msg.length; i++) {
-        str+=data_msg[i]+" ";
+        data.push(data_msg[i]);
+    }
+
+    for(let i = 0; i < data.length; i++) {
+        
+        str+=data[i];
     }
 
     let response;    

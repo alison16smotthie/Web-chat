@@ -13,7 +13,7 @@ class Websocket_Connection{
         this.role = null;
         this.countUsers = 0;
         this.countMessages = 0;
-        this.messageGet=null;
+        this.message=null;
 
     }
 
@@ -62,7 +62,7 @@ class Websocket_Connection{
 
                 const user = getUsers(socket.id);
 
-                this.messageGet = `${guest} tại phòng ${user.room} vừa nhắn tin ${msg}`;
+                this.message = `${guest} tại phòng ${user.room} vừa nhắn tin ${msg}`;
     
                 bot.findKeyChat().then(async () => {
             
@@ -125,8 +125,9 @@ class Websocket_Connection{
     }
 
     
-    autobot = ()=> {
-        return this.messageGet;
+    GetMessages = ()=> {
+
+        return this.message;
     }
 
 
