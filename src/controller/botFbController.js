@@ -50,11 +50,13 @@ let handleMessage = (sender_psid, received_message) =>{
         }
     }
 
-    if(Websocket_Connection.autobot()!=null){
-      response = {
-        "text": `${Websocket_Connection.autobot()}`,
-      }
-    }
+    console.log(Websocket_Connection.autobot())
+
+    // if(Websocket_Connection.autobot()!=null){
+    //   response = {
+    //     "text": `${Websocket_Connection.autobot()}`,
+    //   }
+    // }
 
 
     if(received_message.text==="#Tường"){
