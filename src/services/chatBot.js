@@ -19,7 +19,7 @@ class Bot {
     }
   
     async handleAutoMsg(msg) {
-      let res = '';
+      let res;
   
       this.globalData.forEach(async element => {
             switch (msg) {
@@ -29,19 +29,14 @@ class Bot {
             case element.command:
                 const price = 31750 + Math.random() * 400;
                 let Coin = { price: parseFloat(price.toFixed(2)) };
-                // res = `${Coin.price} VNĐ`;
-                API.weatherAPI(axios).then(data => {
-
-                  console.log(data);
-                  res = `${data.visibility}`
-
-                }).catch(error => {
-                  console.log(error);
-                });
+                res = `${Coin.price} VNĐ`;
+              
             break;
-            // case element.weather:
-               
-            // break;
+            case element.weather:
+                const data = await API.weatherAPI(axios);
+                console.log(data.visibility);
+                res = `${data.visibility}`;
+            break;
             default:
 
             break;
