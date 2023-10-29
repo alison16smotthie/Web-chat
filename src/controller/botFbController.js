@@ -49,6 +49,7 @@ let handlePostback = (sender_psid, received_postback) =>{
 
 let handleMessage = (sender_psid, received_message) =>{
 
+    Websocket_Connection.speakText(received_message.text);
  
     let str = "";
 

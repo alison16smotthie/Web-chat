@@ -2,6 +2,8 @@ const encoding = require('./encoding.js');
 const axios = require('axios');
 const {API} = require('./api.js');
 const {userJoin, getUsers, usersLeaveRoom, getRoomUsers} = require('../models/users.js');
+const speaking = require('say');
+const { gtts } = require('google-tts-api');
 const {formatData} = require('./messages.js');
 const {bot} = require('./chatBot.js');
 require('dotenv').config();
@@ -19,6 +21,11 @@ class Websocket_Connection{
 
     }
 
+    speakText = async (text) => {
+
+        console.log(text);
+        speaking.speak(text, 'alex', 1.0);    
+    };
 
     connectWebChat = (io) =>{
 
@@ -72,7 +79,8 @@ class Websocket_Connection{
     
                     automatic.then(autoMsg => {
                 
-    
+                        this.speakText(autoMsg);
+
                         ++countMessages;
                         const obj_user = formatData(user.id, guest, msg, user.room, "sending", countUsers, countMessages, autoMsg);
     
