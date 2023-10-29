@@ -79,8 +79,6 @@ class Websocket_Connection{
     
                     automatic.then(autoMsg => {
                 
-                        this.speakText(autoMsg);
-
                         ++countMessages;
                         const obj_user = formatData(user.id, guest, msg, user.room, "sending", countUsers, countMessages, autoMsg);
     
