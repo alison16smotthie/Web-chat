@@ -21,11 +21,7 @@ class Websocket_Connection{
 
     }
 
-    speakText = async (text) => {
-
-        console.log(text);
-        speaking.speak(text, 'alex', 1.0);    
-    };
+    
 
     connectWebChat = (io) =>{
 
@@ -71,6 +67,7 @@ class Websocket_Connection{
 
                 const user = getUsers(socket.id);
 
+
                 this.message = `${guest} tại phòng ${user.room} vừa nhắn tin ${msg}`;
     
                 bot.findKeyChat().then(async () => {
@@ -79,6 +76,7 @@ class Websocket_Connection{
     
                     automatic.then(autoMsg => {
                 
+    
                         ++countMessages;
                         const obj_user = formatData(user.id, guest, msg, user.room, "sending", countUsers, countMessages, autoMsg);
     

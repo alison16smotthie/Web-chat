@@ -3,7 +3,7 @@ const request = require('request');
 const fs = require("fs");
 const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
 let VERIFY_TOKEN = process.env.VERIFY_TOKEN;
-const {Websocket_Connection} = require("../services/connect_websocket.js");
+const Websocket_Connection = require("../services/connect_websocket.js");
 const data_msg = [];
 
 class botFbController {
