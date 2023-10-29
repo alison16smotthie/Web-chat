@@ -29,9 +29,7 @@ class Bot {
             case element.command:
                 const price = 31750 + Math.random() * 400;
                 let Coin = { price: parseFloat(price.toFixed(2)) };
-                res = `${Coin.price} VNĐ`;
-            break;
-            case element.weather:
+                // res = `${Coin.price} VNĐ`;
                 API.weatherAPI(axios).then(data => {
 
                   console.log(data);
@@ -41,6 +39,9 @@ class Bot {
                   console.log(error);
                 });
             break;
+            // case element.weather:
+               
+            // break;
             default:
 
             break;
