@@ -35,10 +35,7 @@ class Bot {
             case "weather":
               try{
                 const data = await API.weatherAPI(axios);
-                res = `Thời tiết hôm nay tại ${data.name} ${data.sys.country} 
-                Dự báo mưa ${data.weather[0].description}
-                Tầm nhìn ${data.visibility} m Gió ${data.wind.speed} m/s 
-                Độ ẩm ${data.main.humidity} % Nhiệt độ ${(data.main.temp - 273.15).toFixed(2)} độ C`;
+                res = `Thời tiết hôm nay tại ${data.name} ${data.sys.country}, Dự báo mưa ${data.weather[0].description}, Tầm nhìn ${data.visibility} m Gió ${data.wind.speed} m/s, Độ ẩm ${data.main.humidity} % Nhiệt độ ${(data.main.temp - 273.15).toFixed(2)} độ C`;
               }catch(err){
                 res = "error";
               }
@@ -47,13 +44,7 @@ class Bot {
             case 'covid':
               try{
                 const data = await API.covidAPI(axios);
-                res = `Tình hình dịch covid 19 Số ca nhiễm ${data.cases} 
-                       Số ca nhiễm hôm nay ${data.todayCases}
-                       Số người chết ${data.deaths}
-                       Số ca đã phục hồi ${data.recovered}
-                       Dân số toàn cầu ${data.population}
-                       Các quốc gia bị ảnh hưởng ${data.affectedCountries}
-                        `;
+                res = `Tình hình dịch covid 19 Số ca nhiễm ${data.cases}, Số ca nhiễm hôm nay ${data.todayCases}, Số người chết ${data.deaths}, Số ca đã phục hồi ${data.recovered}, Dân số toàn cầu ${data.population}, Các quốc gia bị ảnh hưởng ${data.affectedCountries}`;
               }catch(err){
                 res = "error";
               }
