@@ -27,6 +27,19 @@ class API {
 
        }
 
+       covidAPI = async (axios) => {
+
+             
+              try {
+                     const response = await axios.get(`https://disease.sh/v3/covid-19/all`);
+                     const covid = response.data;
+
+                     return covid;
+              } catch (error) {
+                     console.error(error);
+              }
+       }
+
 }
 
 
