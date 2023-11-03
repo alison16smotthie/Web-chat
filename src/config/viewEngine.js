@@ -19,8 +19,8 @@ let configViewEngine = (app, bodyParser, handlebars, SESSION_SECRET, SESSION_ALG
             }
       }));
     app.use(cors({
-        //process.env.HOST_ACCESS_API
-        origin: "http://127.0.0.1:5501/src/view/master/main.html",
+        
+        origin: process.env.LOCALHOST_ACCESS_API,
         methods: 'GET,POST,PUT,DELETE',
         allowedHeaders: 'X-Requested-With,content-type',
         credentials: true
