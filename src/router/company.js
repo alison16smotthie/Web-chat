@@ -18,8 +18,6 @@ class CompanyRoute{
 }
 
 
-
-
 module.exports = {
 
   CompanyRoute : new CompanyRoute

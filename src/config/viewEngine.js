@@ -1,6 +1,8 @@
 const express = require('express');
 const session = require('express-session');
 const flash = require('express-flash');
+const cors = require('cors');
+require("dotenv").config();
 const path = require('path');
 
 let configViewEngine = (app, bodyParser, handlebars, SESSION_SECRET, SESSION_ALGORITHM) =>{
@@ -16,6 +18,12 @@ let configViewEngine = (app, bodyParser, handlebars, SESSION_SECRET, SESSION_ALG
                 maxAge: 5 * 60 *1000
             }
       }));
+    app.use(cors({
+        origin: process.env.HOSTNAME,
+        methods: 'GET,POST,PUT,DELETE',
+        allowedHeaders: 'X-Requested-With,content-type',
+        credentials: true
+    }));
     app.use(flash());
     app.use(express.static("./src/public"));
     app.use(bodyParser.json());
