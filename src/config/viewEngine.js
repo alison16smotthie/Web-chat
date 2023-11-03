@@ -20,7 +20,7 @@ let configViewEngine = (app, bodyParser, handlebars, SESSION_SECRET, SESSION_ALG
       }));
     app.use(cors({
         
-        origin: process.env.LOCALHOST_ACCESS_API,
+        origin: process.env.ACCESS_ALL,
         methods: 'GET,POST,PUT,DELETE',
         allowedHeaders: 'X-Requested-With,content-type',
         credentials: true
