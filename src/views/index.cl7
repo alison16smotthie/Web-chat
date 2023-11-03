@@ -1,9 +1,7 @@
 <div class="title-home">
-    <marquee width="100%" direction="right">
         <h1>
             Hãy Nhập tên trước khi vào room
         </h1>
-    </marquee>
 </div>
 <div class="join-container">
     <header class="join-header">
