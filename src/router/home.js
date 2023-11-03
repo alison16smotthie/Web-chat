@@ -19,7 +19,6 @@ class HomeRoute{
       this.router.get('/account', homePage.account);
       this.router.get('/:slug', homePage.show);
       this.router.get('/', homePage.index);
-
       this.router.post('/', homePage.postHome);
       this.router.post('/contact', homePage.postcontact);
       this.router.post('/message', homePage.postmessage);
