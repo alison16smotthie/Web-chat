@@ -19,7 +19,8 @@ let configViewEngine = (app, bodyParser, handlebars, SESSION_SECRET, SESSION_ALG
             }
       }));
     app.use(cors({
-        origin: process.env.LOCALHOST,
+        //process.env.LOCALHOST
+        origin: "https://tuongclearlove7.github.io/",
         methods: 'GET,POST,PUT,DELETE',
         allowedHeaders: 'X-Requested-With,content-type',
         credentials: true
