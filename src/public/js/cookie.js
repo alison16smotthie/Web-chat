@@ -24,7 +24,7 @@ async function companyAPI(){
             return res.json();
         }
     ).catch(function(error) {
-        console.error(error);
+        console.log("error");
     });
     
     console.log(data);
