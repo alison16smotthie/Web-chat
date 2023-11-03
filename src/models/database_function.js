@@ -6,7 +6,7 @@ function render_database(database,req,res, next, page){
 
         res.render(page,{data});
     }).catch(err =>{
-        console.log("DB Buffering timed out after 10000ms");
+        console.log(err);
         res.render('index.cl7');
     });
 }

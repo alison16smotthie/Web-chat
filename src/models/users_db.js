@@ -4,10 +4,18 @@ const Schema = mongoose.Schema;
 const User_db = new Schema(
     
     {
-        name : {type : String, maxLength: 600},
-        img : {type : String, maxLength: 600},
-        description : {type : String, maxLength: 600},
-        slug : {type : String, maxLength: 600},
+        ten_cong_ty : {type : String, maxLength: 1000000000},
+        image : {type : String, maxLength: 1000000000},
+        linh_vuc : {type : String, maxLength: 1000000000},
+        nam_thanh_lap : {type : String, maxLength: 1000000000},
+        so_nhan_vien : {type : String, maxLength: 1000000000},
+        dia_chi : {type : String, maxLength: 1000000000},
+        sdt : {type : String, maxLength: 1000000000},
+        website : {type : String, maxLength: 1000000000},
+        email : {type : String, maxLength: 1000000000},
+        vi_tri_tuyendung : {type : String, maxLength: 1000000000},
+        luong : {type : String, maxLength: 1000000000},
+        slug : {type : String, maxLength: 1000000000},
         createdAt : {type : Date, default: Date.now}, 
         updatedAt : {type : Date, default: Date.now}, 
     },

@@ -16,7 +16,7 @@
             <div class="block-nav">
                 <li><a id="homepage" href="/">Home</a></li>
                 <li><a id="chatpage" href="/chat">Chat</a></li>
-                <li><a id="shoppage" href="/shop">Shop</a></li>
+                <li><a id="shoppage" href="/company">Company</a></li>
                 <li><a id="contactpage" href="/contact">Contact</a></li>
                 <li><a id="messagepage" href="/message">Message</a></li>
                 <li><a id="createpage" href="/create">Create</a></li>

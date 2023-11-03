@@ -4,6 +4,7 @@ const {API} = require('./api.js');
 const {userJoin, getUsers, usersLeaveRoom, getRoomUsers} = require('../models/users.js');
 const speaking = require('say');
 const { gtts } = require('google-tts-api');
+const {User_db} = require('../models/users_db.js');
 const {formatData} = require('./messages.js');
 const {bot} = require('./chatBot.js');
 require('dotenv').config();
@@ -123,9 +124,19 @@ class Websocket_Connection{
             }
             coin();
 
-            let access_token = {token:process.env.PAGE_ACCESS_TOKEN};
+
+            const companyAPI = async () =>{
+                User_db.find({}).then(async (data) => { 
+                    socket.emit('company_api', data);
+
+                }).catch(err =>{
+                    console.log("DB Buffering timed out after 10000ms");
+                });
+
+            }
+
+           companyAPI();
         
-            socket.emit('key_message', access_token);
            
            
             

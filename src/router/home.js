@@ -10,7 +10,7 @@ class HomeRoute{
 
     Router(){
 
-      this.router.get('/shop',homePage.shop);
+      this.router.get('/company',homePage.shop);
       this.router.get('/contact', homePage.contact);
       this.router.get('/message', homePage.message);
       this.router.get('/apiLogin', homePage.getApiLogin);

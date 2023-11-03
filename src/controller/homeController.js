@@ -65,10 +65,17 @@ class homeController {
     }
     postStore = async (req, res, next)=>{
  
-        const car = new User_db(req.body);
+        try{
+            const car = new User_db(req.body);
        
-        car.save();
-        res.send('Create new model!');
+            car.save();
+            res.redirect('/company');
+        }catch(err){
+            res.send({
+                "message":err
+            });
+        }
+       
     }
 
     login = async (req, res, next)=>{

@@ -36,6 +36,16 @@ socket.on('coin',async coin => {
 });
 
 
+socket.on('company_api',async company => {
+
+    
+
+    console.log(company);
+
+    
+});
+
+
 
 
 
