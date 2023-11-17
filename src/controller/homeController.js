@@ -7,9 +7,10 @@ const {User_db,Title_web, User_send_message, Account} = require('../models/users
 class homeController {
     
     constructor(username, password) {
+
         this.username = username;
         this.password = password;
-      }
+    }
 
     index = async (req, res, next)=>{
         
@@ -25,16 +26,17 @@ class homeController {
 
     }
     contact = async (req,res, next)=>{
-
-
-        
        
         renderView.render_database(User_db ,req, res , next, 'contact.cl7');
     }
     postcontact = async (req, res, next) => {
+
         const finished = (err) => {
+
           if (err) {
+
             console.error(err);
+
             return next();
           }
         };
@@ -66,26 +68,33 @@ class homeController {
     postStore = async (req, res, next)=>{
  
         try{
+
             const car = new User_db(req.body);
        
             car.save();
+
             res.redirect('/company');
+
         }catch(err){
+
             res.send({
                 "message":err
             });
         }
-       
     }
 
     login = async (req, res, next)=>{
         Account.find({}).then(data => { 
+
                 const users = render_list_database(data);
+
                 users.forEach(user =>{
                    
                 });
+
             }).catch(err =>{next(err);
         });
+
        res.render('show/login.cl7');
     }
 
@@ -93,18 +102,25 @@ class homeController {
     loginSuccess = async (res,user)=>{
        
         setTimeout(function(){
+
             res.render('./show/account.cl7',{
+
                 user : render_toObjDB(user)
             });
+
         },2000);
     }
 
     getApiLogin = async (req, res, next)=>{
         try {
+
             const accounts = await Account.find();
+
             res.json(accounts);
         } catch (error) {
+
             console.error(error);
+
             res.status(500).send('Server error');
         }
     }
@@ -115,10 +131,14 @@ class homeController {
         const account = new Account({ username, password });
     
         try {
+
             const savedAccount = await account.save();
             res.status(201).json(savedAccount);
+
         } catch (error) {
+
             console.error(error);
+
             res.status(500).send('Server error');
         }
     }
@@ -126,22 +146,31 @@ class homeController {
    
     
     postLogin = async (req, res, next)=>{
+
         const input_user = req.body;
         const account = new Account(input_user);
+        
         Account.findOne({username :  input_user.username})
+
                 .then(user => { 
+
                     req.session.user = {
+
                         username : user.username,
                     }
                     console.log(req.session);
                    
 
                     this.username = user.username;
+
                     if(user.password === input_user.password){
+
                         this.loginSuccess(res,user);
                     }
                     else{
+
                         res.render('./show/login.cl7',{
+
                             fail : 'Xin lỗi vì điều này bạn đã login thất bại!'
                         });
                     }   
@@ -156,11 +185,16 @@ class homeController {
     account = async (req, res, next)=>{
 
         var user = {username : this.username};
+
         Account.findOne({})
+
             .then(myuser => {
+
                 res.render('show/account.cl7', {
+
                     user
                 });
+
             }).catch(err =>{next(err);
         });
     }
@@ -168,14 +202,20 @@ class homeController {
     show = async (req,res, next)=>{
 
         User_db.findOne({slug: req.params.slug})
+
             .then(data => { 
+
                 res.render('show/show.cl7', {
-                    data : render_toObjDB(data)});
+                    data : render_toObjDB(data)
+
+                });
+
             }).catch(err =>{next(err);
         });
     }
 }
 
 module.exports = {
+
     homePage : new homeController,
 }

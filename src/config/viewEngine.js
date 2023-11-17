@@ -8,23 +8,24 @@ const path = require('path');
 let configViewEngine = (app, bodyParser, handlebars, SESSION_SECRET, SESSION_ALGORITHM) =>{
 
     app.use(session({
+
         secret: SESSION_SECRET,
         algorithm: SESSION_ALGORITHM,
         resave: false,
         saveUninitialized: true,
-        cookie:{
-                secure: false,
-                httpOnly : true,
-                maxAge: 5 * 60 *1000
-            }
-      }));
+        cookie:{secure: false,httpOnly : true,maxAge: 5 * 60 *1000}
+
+    }));
+
     app.use(cors({
         
         origin: process.env.ACCESS_ALL,
         methods: 'GET,POST,PUT,DELETE',
         allowedHeaders: 'X-Requested-With,content-type',
         credentials: true
+
     }));
+
     app.use(flash());
     app.use(express.static("./src/public"));
     app.use(bodyParser.json());
@@ -37,6 +38,7 @@ let configViewEngine = (app, bodyParser, handlebars, SESSION_SECRET, SESSION_ALG
 }
 
 module.exports = {
+    
     configViewEngine : configViewEngine
 };
     

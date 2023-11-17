@@ -12,11 +12,12 @@ class database_connection{
             useUnifiedTopology: true,
             
         }).then(res => 
+
             console.log('connect successfully'))
+
         .catch(err => 
+
         console.log('connect failed : ', err));
-    
-        
     }
 }
 

@@ -11,16 +11,20 @@ class middleware {
     middleware1 = async (req, res, next)=>{
 
         if(['tuong', 'thao'].includes(req.query.user)){
+
             req.user2 = 'ThaoRose9';
+
             return next();
         }
         res.status(403).json({
+
             message:'Access denied'
         });
     }
     middleware2 = async (req, res, next)=>{
 
         res.status(403).json({
+
             user1:'TuongClearlove7',
             user2: req.user2,
         });
@@ -29,6 +33,7 @@ class middleware {
     middlewareCreate = async (req, res, next)=> {
 
         if(req.query.join === 'admin'){
+
             return next();
         } 
         res.status(404).json({message:'Unable to access!'});
@@ -43,13 +48,21 @@ class middleware {
         const characters = username.split('');
         
         if (!username || !room) {
+
             res.render('index.cl7');
+
         } else if (invalid.test(username) || invalid.test(room)) {
+
             res.render('index.cl7');
+
         } else {
+
             if(characters.length < 16){
+
                 return next();
+
             }else{
+
                 res.render('index.cl7');
             }
         }
@@ -58,5 +71,6 @@ class middleware {
 }
 
 module.exports = {
+    
     middleware : new middleware,
 }

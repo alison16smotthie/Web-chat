@@ -11,6 +11,7 @@ class chatController {
     chat = async (req,res, next)=>{
 
         console.log(req.query);
+
         renderView.render_database(User_db ,req, res , next, 'chat.cl7');
     }
 
@@ -21,11 +22,17 @@ class chatController {
 
     getApiMessage = async (req, res, next)=>{
         try {
+
             const messages = await Key_chat.find();
+
             res.json(messages);
+
         } catch (error) {
+
             console.error(error);
+
             res.status(500).send('Server error');
+
         }
     }
 
@@ -33,11 +40,14 @@ class chatController {
         
         const { message, reply, command } = req.body;
         const messages = new Key_chat({ message, reply , command});
+
         try {
+
             const savedMessages = await messages.save();
             res.status(201).json(savedMessages);
 
         } catch (error) {
+
             console.error(error);
             res.status(500).send('Server error');
         }
@@ -49,6 +59,7 @@ class chatController {
 }
 
 module.exports = {
+    
     chatPage : new chatController,
 }
 

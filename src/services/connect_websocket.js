@@ -22,8 +22,6 @@ class Websocket_Connection{
 
     }
 
-    
-
     connectWebChat = (io) =>{
 
         let guest = this.guest;
@@ -36,30 +34,41 @@ class Websocket_Connection{
             socket.on('joinRoom', ({username, room}) => {
                 
                 ++countUsers;
+
                 console.log(`${socket.id} connect to the page chat`);
     
                 switch (username) {
+
                     case 'tuong':case 'thao':case 'tuongclearlove7':case 'hiii':
+
                         role = `<span style='color:rgb(23 140 234);font-weight:bold;'>Admin</span> ${username}`;
                         guest = username;
+
                     break;
+
                     default:
+
                         role = `<span style='color:#008216;font-weight:bold;'>User</span> ${username}`;
                         guest = username;
+
                     break;
                 }
                 const user = userJoin(socket.id,role, room);
+
                 socket.join(user.room);
                
                 const Obj_user = formatData(user.id , username, `${username} has joined the webchat`, user.room,  "joined the webchat", countUsers, countMessages, null);
                 
                 if(Obj_user.countUsers > 1){
+
                     Obj_user.countMessages = 0;
                 }
+
                 socket.emit('message', Obj_user);
                 socket.broadcast.to(user.room).emit('message', Obj_user);
          
                 console.table(Obj_user);
+
                 io.to(user.room).emit('roomUsers', {room : user.room,users : getRoomUsers(user.room)});
     
             });
@@ -76,12 +85,13 @@ class Websocket_Connection{
                     const automatic = bot.handleAutoMsg(msg);
     
                     automatic.then(autoMsg => {
-                
     
                         ++countMessages;
+                        
                         const obj_user = formatData(user.id, guest, msg, user.room, "sending", countUsers, countMessages, autoMsg);
     
                         console.table(obj_user);
+
                         io.to(user.room).emit('message', obj_user);
                     });
                 });
@@ -99,7 +109,9 @@ class Websocket_Connection{
                     io.to(user.room).emit('message',
     
                     formatData(user.id, user.room, `${guest} has left the webchat`, user.room,'out webchat', countUsers, countMessages, null));
+                    
                     console.table(formatData(user.id, guest,  `${guest} has left the webchat`,  user.room, 'out webchat', countUsers, countMessages, null));
+                    
                     io.to(user.room).emit('roomUsers', {room : user.room,users: getRoomUsers(user.room)});
                 }
             });
@@ -109,16 +121,23 @@ class Websocket_Connection{
     connectToClient = (io) =>{
  
         io.on('connection', (socket) => {
+
              console.log(socket.id + " websocket connection..."); 
+
             socket.on('disconnect', () => {
+
                 console.log(`${socket.id} disconnect to server`);
             });
     
              const coin = async () =>{
+
                 while (true) {
+
                     const price = 31750 + Math.random() * 400;
                     let Coin ={ price : parseFloat(price.toFixed(2))};
+
                     socket.emit('coin',Coin);
+
                     await new Promise(resolve => setTimeout(resolve, 50));
                 }
             }
@@ -126,10 +145,13 @@ class Websocket_Connection{
 
 
             const companyAPI = async () =>{
+
                 User_db.find({}).then(async (data) => { 
+
                     socket.emit('company_api', data);
 
                 }).catch(err =>{
+
                     console.log("DB Buffering timed out after 10000ms");
                 });
 
@@ -143,7 +165,6 @@ class Websocket_Connection{
         });
     }
 
-    
     GetMessages = ()=> {
 
         return this.message;

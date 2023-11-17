@@ -4,7 +4,7 @@ const fs = require("fs");
 const axios = require('axios');
 const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
 let VERIFY_TOKEN = process.env.VERIFY_TOKEN;
-const Websocket_Connection = require("../services/connect_websocket.js");
+const {Websocket_Connection} = require("../services/connect_websocket.js");
 const data_msg = [];
 
 class botFbController {
@@ -29,16 +29,22 @@ class botFbController {
 
 
 let handlePostback = (sender_psid, received_postback) =>{
+
     let response;
     
     let payload = received_postback.payload;
 
     switch (payload) {
+
       case "no":
+
         response = { "text": "Cảm ơn!" }
+
       break;
       case "yes":
+
         response = { "text": "ohhh, cảm ơn vì bạn đã nhận xét <: " }
+
       break;
     
       default:
@@ -63,26 +69,34 @@ let handleMessage = (sender_psid, received_message) =>{
     let response;    
     
     if(received_message.text){
+
         response = {
+
           "text": `${received_message.text}`,
         }
     }
 
-    if (received_message.text === "message") {    
+    if (received_message.text === "message") {   
+
         response = {
+
           "text": `${str}`,
         }
     }
 
 
     if(received_message.text==="#Tường"){
-        response = {"text": `${received_message.text} : Tường nick name Clearlove7`,
-        }
+
+        response = {"text": `${received_message.text} : Tường nick name Clearlove7`,}
+
         console.log(response);
     }
     else if (received_message.attachments) {
+
       let attachment_url = received_message.attachments[0].payload.url;
+
       response = {
+        
         "attachment": {
           "type": "template",
           "payload": {

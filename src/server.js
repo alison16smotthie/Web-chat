@@ -19,7 +19,9 @@ require('dotenv').config();
 
 viewEngine.configViewEngine(app, bodyParser, handleBars, 
 process.env.SESSION_SECRET, process.env.SESSION_ALGORITHM); 
+
 route.webInit(app);
+
 Websocket_Connection.connectToClient(io);
 Websocket_Connection.connectWebChat(io);
 database_connection.connectDB(process.env.STRING_CONNECTION_MONGODB);
