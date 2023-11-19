@@ -36,7 +36,8 @@ class middleware {
 
             return next();
         } 
-        res.status(404).json({message:'Unable to access!'});
+
+        res.redirect('/create');
     }
 
     

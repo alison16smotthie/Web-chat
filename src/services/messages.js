@@ -6,6 +6,7 @@ function formatData(id, username, text, room, status, countUsers, countMessages,
    
 
     return {
+        
         id,
         username,
         text,

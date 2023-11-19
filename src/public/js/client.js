@@ -7,6 +7,7 @@ const usersName = document.querySelector('#users');
 const countUser = document.querySelector('#countUsers');
 
 const {username, room} = Qs.parse(location.search, {
+
      ignoreQueryPrefix: true
 });
 
@@ -28,6 +29,7 @@ socket.on('message',async message => {
 
 
 chatForm.addEventListener('submit', (e) => {
+    
     e.preventDefault();
     const msg = e.target.elements.text.value;
     socket.emit('chatMessage',msg); 

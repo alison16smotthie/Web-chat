@@ -8,14 +8,20 @@ const {formatData} = require('./messages.js');
 const moment = require('moment');
 const testcase2 = require('./encoding.js');
 const {convertStringToHex} = require('./encoding.js');
+
 describe('the can', () => {
 
     const io = new Server(server);
+
     test('connect success websocket', () => {
+
         expect(testcase1.connectWebChat(io)).not.toBe(io);
     });
+
     test('the argument is true', () => {
-        io.on('connection',socket => { 
+
+        io.on('connection',socket => {
+
             expect(formatData(null,null,null,null,null,null)).toStrictEqual({
                 id : socket.id, 
                 room: null, 
@@ -28,7 +34,9 @@ describe('the can', () => {
             });
         });
     });
+
     test('same results', () => {
+
         expect(testcase2.convertStringToHex1).toEqual(convertStringToHex('server'));
     });
 });

@@ -19,6 +19,7 @@ let webInit = (app) => {
 }
 
 module.exports = {
+    
     webInit : webInit
 };
 

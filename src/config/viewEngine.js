@@ -31,7 +31,9 @@ let configViewEngine = (app, bodyParser, handlebars, SESSION_SECRET, SESSION_ALG
     app.use(bodyParser.json());
     app.use(express.urlencoded({extended: true})); 
     app.use(express.json());    
-    app.engine('cl7', handlebars.engine({extname : '.cl7',}));
+    app.engine('cl7', handlebars.engine(
+        {extname : '.cl7',}
+    ));
     app.set('view engine','cl7');
     app.use(express.static("./src/views"));
     app.set("views", "./src/views");

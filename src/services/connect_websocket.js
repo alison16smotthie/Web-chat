@@ -134,7 +134,10 @@ class Websocket_Connection{
                 while (true) {
 
                     const price = 31750 + Math.random() * 400;
-                    let Coin ={ price : parseFloat(price.toFixed(2))};
+                    let Coin ={ 
+                        
+                        price : parseFloat(price.toFixed(2))
+                    };
 
                     socket.emit('coin',Coin);
 

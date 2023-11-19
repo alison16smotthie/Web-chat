@@ -5,8 +5,8 @@ function render_database(database,req,res, next, page){
 
         data = await data.map(res => res.toObject());
 
-        res.render(page,{data})
-        ;
+        res.render(page,{data});
+        
     }).catch(err =>{
 
         console.log(err);
@@ -26,6 +26,7 @@ function render_list_database(list_mongoose){
 }
 
 module.exports = {
+    
     render_database,
     render_toObjDB,
     render_list_database,

@@ -16,19 +16,23 @@ class homeController {
         
         renderView.render_database(User_db ,req, res , next, 'index.cl7');
     }
+    
     postHome = async (req, res, next)=>{
     
       
     }
+
     shop = async (req,res, next)=>{
   
         renderView.render_database(User_db ,req, res , next, 'shop.cl7');
 
     }
+
     contact = async (req,res, next)=>{
        
         renderView.render_database(User_db ,req, res , next, 'contact.cl7');
     }
+
     postcontact = async (req, res, next) => {
 
         const finished = (err) => {
@@ -55,16 +59,19 @@ class homeController {
        
         renderView.render_database(User_send_message ,req, res , next, 'message.cl7');
     }
+
     postmessage = async (req,res, next)=>{
        
         console.log(req.body.msg);
 
         renderView.render_database(User_send_message ,req, res , next, 'message.cl7');
     }
+
     create = async (req, res, next)=>{
         
         renderView.render_database(User_db ,req, res , next, 'show/create.cl7');
     }
+
     postStore = async (req, res, next)=>{
  
         try{
@@ -78,12 +85,14 @@ class homeController {
         }catch(err){
 
             res.send({
+
                 "message":err
             });
         }
     }
 
     login = async (req, res, next)=>{
+
         Account.find({}).then(data => { 
 
                 const users = render_list_database(data);
@@ -112,11 +121,13 @@ class homeController {
     }
 
     getApiLogin = async (req, res, next)=>{
+
         try {
 
             const accounts = await Account.find();
 
             res.json(accounts);
+
         } catch (error) {
 
             console.error(error);
@@ -133,6 +144,7 @@ class homeController {
         try {
 
             const savedAccount = await account.save();
+
             res.status(201).json(savedAccount);
 
         } catch (error) {
@@ -177,6 +189,7 @@ class homeController {
             }).catch(err =>{
              
                 res.render('./show/login.cl7',{
+
                     fail : 'Xin lỗi vì điều này bạn đã login thất bại'
                 });
         });
@@ -206,6 +219,7 @@ class homeController {
             .then(data => { 
 
                 res.render('show/show.cl7', {
+
                     data : render_toObjDB(data)
 
                 });

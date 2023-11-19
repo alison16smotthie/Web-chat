@@ -20,6 +20,7 @@ function sendMessage(message) {
 }
 
 async function autoSend(message, auto_send) {
+    
     const div = document.createElement('div');
 
     div.classList.add('auto-message');
@@ -41,6 +42,7 @@ async function autoSend(message, auto_send) {
 
             setTimeout(renderText, 50);
         }
+
         if (i < auto_send.length && run) {
 
             autoMessage.textContent += auto_send[i];
@@ -69,6 +71,7 @@ function asyncCallAutoMsg(message,msg_auto) {
                 return;
             }
             else{
+
                 autoSend(message,msg_auto);
             }
         }, 500);   

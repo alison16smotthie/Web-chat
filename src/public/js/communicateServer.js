@@ -1,7 +1,8 @@
 import { render_List , darkmode} from "./clientRendering.js";
 const socket = io();
 const CoinID = document.getElementById('coin');
- 
+let lastPrice = 0;
+
 darkmode();
 
 
@@ -12,7 +13,6 @@ socket.on('connect',resource => {
     console.log(resource);
 });
 
-let lastPrice = 0;
 
 socket.on('coin',async coin => {
 
@@ -47,9 +47,6 @@ socket.on('coin',async coin => {
 
 socket.on('company_api',async company => {
 
-    
-
-    console.log(company);
 
     
 });

@@ -5,6 +5,7 @@ const {middleware} = require('../middleware/middleware');
 class HomeRoute{
 
     constructor(){
+        
         this.router = express.Router();
     }
 
@@ -32,6 +33,7 @@ class HomeRoute{
 
 
 module.exports = {
+    
     HomeRoute : new HomeRoute,
 };
 

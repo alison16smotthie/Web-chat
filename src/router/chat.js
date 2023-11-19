@@ -5,6 +5,7 @@ const {middleware} = require('../middleware/middleware');
 class ChatRoute{
 
     constructor(){
+        
         this.router = express.Router();
     }
 

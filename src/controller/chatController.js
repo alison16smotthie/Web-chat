@@ -21,6 +21,7 @@ class chatController {
     }
 
     getApiMessage = async (req, res, next)=>{
+        
         try {
 
             const messages = await Key_chat.find();
@@ -44,11 +45,13 @@ class chatController {
         try {
 
             const savedMessages = await messages.save();
+
             res.status(201).json(savedMessages);
 
         } catch (error) {
 
             console.error(error);
+
             res.status(500).send('Server error');
         }
     }

@@ -5,6 +5,7 @@ const {company_api} = require('../controller/api/api_CompanyController.js');
 class CompanyRoute{
 
   constructor(){
+    
       this.router = express.Router();
   }
 

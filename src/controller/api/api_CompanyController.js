@@ -11,12 +11,12 @@ class api_CompanyController {
       
           data = await data.map(res => res.toObject());
 
-        
-
           res.status(200).send(data);
 
       }).catch(err =>{
+
           console.log(err);
+
           res.render('index.cl7');
       });
   }
@@ -24,5 +24,6 @@ class api_CompanyController {
 }
 
 module.exports = {
+  
   company_api : new api_CompanyController,
 }
