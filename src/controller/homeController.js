@@ -52,6 +52,7 @@ class homeController {
         data.home.push(jsonData);
         fs.writeFile('data.json', JSON.stringify(data), finished);
         console.log(data);
+        
         renderView.render_database(User_db, req, res, next, 'contact.cl7');
     }
 

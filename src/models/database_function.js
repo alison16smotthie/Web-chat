@@ -1,19 +1,27 @@
 
-function render_database(database,req,res, next, page){
+async function render_database(database, req, res, next, page) {
     
-    database.find({}).then(async (data) => { 
+    try {
+        const data = await database.find({});
+        const mappedData = data.map(item => item.toObject());
 
-        data = await data.map(res => res.toObject());
+        res.render(page, { data: mappedData });
 
-        res.render(page,{data});
-        
-    }).catch(err =>{
+    } catch (err) {
 
-        console.log(err);
+        console.error("Error:", err);
 
-        res.render('index.cl7');
-    });
+        if (err.name === 'MongoTimeoutError') {
+
+            res.status(500).send('Database operation timed out');
+
+        } else {
+
+            res.render('index.cl7');
+        }
+    }
 }
+
 
 function render_toObjDB(mongoose){
 

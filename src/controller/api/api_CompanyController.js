@@ -7,20 +7,22 @@ class api_CompanyController {
 
   index = async (req, res, next)=>{
         
-    User_db.find({}).then(async (data) => { 
-      
-          data = await data.map(res => res.toObject());
+    await Promise.all(
 
-          res.status(200).send(data);
+      User_db.find({}).then(async (data) => { 
+      
+        data = await data.map(res => res.toObject());
+
+        res.status(200).send(data);
 
       }).catch(err =>{
 
-          console.log(err);
+          console.log("failed : "+err);
 
           res.render('index.cl7');
-      });
+      })
+    );
   }
-
 }
 
 module.exports = {

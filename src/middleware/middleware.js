@@ -37,7 +37,7 @@ class middleware {
             return next();
         } 
 
-        res.redirect('/create');
+        res.redirect('/');
     }
 
     

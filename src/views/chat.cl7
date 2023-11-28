@@ -17,8 +17,11 @@
       <ul id="users"></ul>
     </div>
     <div class="chat-messages">
+       <div class="message-welcome">
+          <span style="text-align: center;" class="welcome-webchat">Loading...</span>
+        </div>
+
         <div class="message">
-          <h2 style="text-align: center;" class="welcome-webchat"></h2>
         </div>
         <div class="auto-message">
           

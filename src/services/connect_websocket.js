@@ -149,22 +149,20 @@ class Websocket_Connection{
 
             const companyAPI = async () =>{
 
-                User_db.find({}).then(async (data) => { 
+
+                await User_db.find({}).then(async (data) => { 
 
                     socket.emit('company_api', data);
 
                 }).catch(err =>{
 
                     console.log("DB Buffering timed out after 10000ms");
-                });
-
+                })
             }
 
-           companyAPI();
+            companyAPI();
         
            
-           
-            
         });
     }
 

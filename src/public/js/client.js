@@ -50,7 +50,19 @@ function clientGetUsers(users){
     }`;
     
     document.querySelector('.welcome-webchat').innerHTML = 
-    `HELLO WORLD ^^ <br>${username.toUpperCase()} WELCOME TO WEBCHAT`;
+    `<span><br><b>HELLO ${username.toUpperCase()}</b> WELCOME TO WEBCHAT</span>
+    <br>
+    <b>You can test the bot by messaging the following keywords into the chat:</b>
+    <br>
+    <div class="list-keyword">
+        <li>weather</li>
+        <li>hi</li>
+        <li>what is your name?</li>
+        <li>covid</li>
+        <li>company</li>
+    </div>
+    
+    `;
     
 }
 

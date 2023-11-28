@@ -1,11 +1,22 @@
-async function alertSuccess(io){
+const app = express();
+const http = require('http');
+const server = http.createServer(app);
+const { Server } = require("socket.io");
+const io = new Server(server);
+
+async function notifiAlert(){
+
     io.on('connection', (socket) => {
-        socket.emit("alert","login successfully");
+
+        socket.emit("alert","thong bao!!!");
     });
 }
 
 
-module.exports = {alertSuccess};
+module.exports = {
+    
+    notifiAlert : notifiAlert
+};
 
 
 

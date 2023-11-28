@@ -24,11 +24,14 @@ async function autoSend(message, auto_send) {
     const div = document.createElement('div');
 
     div.classList.add('auto-message');
-    div.innerHTML = `<p class="auto">${"Bot"} <span>${message.time}</span></p<p class="text-auto"></p>`;
+    div.innerHTML = `<p class="auto">${"Bot"} <span>${message.time}</span></p><p class="text-auto"></p>`;
+
 
     document.querySelector('.chat-messages').appendChild(div);
   
     const autoMessage = div.querySelector('.text-auto');
+
+    
     let i = 0;
     let run = true;
 
