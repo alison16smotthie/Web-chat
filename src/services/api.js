@@ -11,7 +11,7 @@ class API {
 
               } catch (error) {
 
-                     console.error(error);
+                     console.log("The process of calling the product API is being interrupted: "+error);
               }
        };
 
@@ -28,7 +28,7 @@ class API {
 
               } catch (error) {
 
-                     console.error(error);
+                     console.log("The process of calling the weather API is being interrupted: "+error);
               }
 
        }
@@ -43,7 +43,7 @@ class API {
 
               } catch (error) {
 
-                     console.error(error);
+                     console.log("The process of calling the covid API is being interrupted: "+error);
               }
        }
 

@@ -43,11 +43,42 @@ function getRoom(room){
     roomName.innerHTML = `${room}`;
 }
 
+
+function scan_keywords(...keywords) {
+
+    let str = "";
+
+    for (var i = 0; i < keywords.length; i++) {
+
+        if (i < keywords.length) {
+
+            str += `<li>${keywords[i]}</li>`;
+        }
+    }
+
+    return str;
+}
+
+
 function clientGetUsers(users){
 
     usersName.innerHTML = `${users.map(user =>
+
         `<li>${user.username}</li>`).join(" ")
     }`;
+
+    const keywords = [
+
+        'hello',
+        'crush',
+        "weather",
+        'hi',
+        'what is your name?',
+        'covid',
+        'company',
+        'giá coin'
+    ];
+
     
     document.querySelector('.welcome-webchat').innerHTML = 
     `<span><br><b>HELLO ${username.toUpperCase()}</b> WELCOME TO WEBCHAT</span>
@@ -55,11 +86,7 @@ function clientGetUsers(users){
     <b>You can test the bot by messaging the following keywords into the chat:</b>
     <br>
     <div class="list-keyword">
-        <li>weather</li>
-        <li>hi</li>
-        <li>what is your name?</li>
-        <li>covid</li>
-        <li>company</li>
+        ${scan_keywords(...keywords)}
     </div>
     
     `;

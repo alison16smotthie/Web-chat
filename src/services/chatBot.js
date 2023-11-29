@@ -27,85 +27,86 @@ class Bot {
     
       await Promise.all(
 
-        this.globalData.map(async (element) => {
+          this.globalData.map(async (element) => {
 
-          switch (msg) {
+              switch (msg) {
 
-            case element.message:
+                case element.message:
 
-              res = element.reply;
+                  res = element.reply;
 
-              break;
-            case element.command:
-
-              const price = 31750 + Math.random() * 400;
-              let Coin = { price: parseFloat(price.toFixed(2)) };
-              res = `${Coin.price} VNĐ`;
-
-              break;
-            case "weather":
-
-              try{
-
-                const data = await API.weatherAPI(axios);
-                
-                if(data.name){
-
-                    data.name = "Đà Nẵng";
-                }
-
-                res = `Thời tiết hôm nay tại ${data.name} ${data.sys.country}, Dự báo mưa ${data.weather[0].description}, Tầm nhìn ${data.visibility} m Gió ${data.wind.speed} m/s, Độ ẩm ${data.main.humidity} % Nhiệt độ ${(data.main.temp - 273.15).toFixed(2)} độ C`;
+                break;
               
-              }catch(err){
+                case element.command:
 
-                res = "error";
-              }
-             
-              break;
-            case 'covid':
+                  const price = 31750 + Math.random() * 400;
+                  let Coin = { price: parseFloat(price.toFixed(2)) };
+                  res = `${Coin.price} VNĐ`;
 
-              try{
+                break;
+                case "weather":
 
-                const data = await API.covidAPI(axios);
-                res = `Tình hình dịch covid 19 Số ca nhiễm ${data.cases}, Số ca nhiễm hôm nay ${data.todayCases}, Số người chết ${data.deaths}, Số ca đã phục hồi ${data.recovered}, Dân số toàn cầu ${data.population}, Các quốc gia bị ảnh hưởng ${data.affectedCountries}`;
-              }catch(err){
+                  try{
 
-                res = "Calling the API failed!!!";
-              }
-              break;
-              case "company":
+                    const data = await API.weatherAPI(axios);
 
-                try {
+                    if(data.name){
 
-                  const data = await User_db.find({});
-                  let st = "";
+                        data.name = "Đà Nẵng";
+                    }
 
-                  for (let i = 0; i < data.length; i++) {
+                    res = `Thời tiết hôm nay tại ${data.name} ${data.sys.country}, Dự báo mưa ${data.weather[0].description}, Tầm nhìn ${data.visibility} m Gió ${data.wind.speed} m/s, Độ ẩm ${data.main.humidity} % Nhiệt độ ${(data.main.temp - 273.15).toFixed(2)} độ C`;
+                  
+                  }catch(err){
 
-                      st+=data[i].ten_cong_ty
-                      +data[i].linh_vuc
-                      +data[i].dia_chi
-                      +data[i].email
-                      +data[i].sdt
-                      +data[i].vi_tri_tuyendung
-                      ;
+                    res = "error";
                   }
+                
+                break;
+                case 'covid':
 
-                  res = st;
-                  console.log(res);
+                  try{
 
-                } 
-                catch (err) {
+                    const data = await API.covidAPI(axios);
+                    res = `Tình hình dịch covid 19 Số ca nhiễm ${data.cases}, Số ca nhiễm hôm nay ${data.todayCases}, Số người chết ${data.deaths}, Số ca đã phục hồi ${data.recovered}, Dân số toàn cầu ${data.population}, Các quốc gia bị ảnh hưởng ${data.affectedCountries}`;
+                  }catch(err){
 
-                  console.log(err);
-                  res = "Calling the API failed!!!";
+                    res = "Calling the API failed!!!";
+                  }
+                break;
+                  case "company":
 
-                }
-              break;
-            default:
-              break;
-          }
-        })
+                    try {
+
+                      const data = await User_db.find({});
+                      let st = "";
+
+                      for (let i = 0; i < data.length; i++) {
+
+                          st+=data[i].ten_cong_ty
+                          +data[i].linh_vuc
+                          +data[i].dia_chi
+                          +data[i].email
+                          +data[i].sdt
+                          +data[i].vi_tri_tuyendung
+                          ;
+                      }
+
+                      res = st;
+                      console.log(res);
+
+                    } 
+                    catch (err) {
+
+                      console.log(err);
+                      res = "Calling the API failed!!!";
+
+                    }
+                break;
+                default:
+                break;
+              }
+          })
       );
     
       return res;
