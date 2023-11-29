@@ -5,24 +5,21 @@ require("dotenv").config();
 
 class api_CompanyController {
 
-  index = async (req, res, next)=>{
-        
-    await Promise.all(
+    index = async (req, res, next)=>{
+          
+        User_db.find({}).then(async (data) => { 
+          
+          data = await data.map(res => res.toObject());
 
-      User_db.find({}).then(async (data) => { 
-      
-        data = await data.map(res => res.toObject());
+          res.status(200).send(data);
 
-        res.status(200).send(data);
+        }).catch(err =>{
 
-      }).catch(err =>{
+            console.log("The process of calling the company API is being interrupted: " + err);
 
-          console.log("failed : "+err);
-
-          res.render('index.cl7');
-      })
-    );
-  }
+            res.render('index.cl7');
+        });
+    }
 }
 
 module.exports = {

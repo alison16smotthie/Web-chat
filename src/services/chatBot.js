@@ -48,7 +48,14 @@ class Bot {
               try{
 
                 const data = await API.weatherAPI(axios);
+                
+                if(data.name){
+
+                    data.name = "Đà Nẵng";
+                }
+
                 res = `Thời tiết hôm nay tại ${data.name} ${data.sys.country}, Dự báo mưa ${data.weather[0].description}, Tầm nhìn ${data.visibility} m Gió ${data.wind.speed} m/s, Độ ẩm ${data.main.humidity} % Nhiệt độ ${(data.main.temp - 273.15).toFixed(2)} độ C`;
+              
               }catch(err){
 
                 res = "error";
