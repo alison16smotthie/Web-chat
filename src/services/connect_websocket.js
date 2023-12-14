@@ -35,7 +35,7 @@ class Websocket_Connection{
                 
                 ++countUsers;
 
-                console.log(`${socket.id} connect to the page chat`);
+                // console.log(`${socket.id} connect to the page chat`);
     
                 switch (username) {
 
@@ -116,13 +116,15 @@ class Websocket_Connection{
                 }
             });
         });
+
+    
     }
 
     connectToClient = (io) =>{
  
         io.on('connection', (socket) => {
 
-             console.log(socket.id + " websocket connection..."); 
+            //  console.log(socket.id + " websocket connection..."); 
 
             socket.on('disconnect', () => {
 

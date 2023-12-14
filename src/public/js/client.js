@@ -86,7 +86,7 @@ function clientGetUsers(users){
     <b>You can test the bot by messaging the following keywords into the chat:</b>
     <br>
     <div class="list-keyword">
-        ${scan_keywords(...keywords)}
+    ${scan_keywords(...keywords)}
     </div>
     
     `;
