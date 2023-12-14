@@ -30,7 +30,7 @@ route.webInit(app);
 
 Websocket_Connection.connectToClient(io);
 Websocket_Connection.connectWebChat(io);
-ChatReactService.chatService(io);
+// ChatReactService.chatService(io);
 
 database_connection.connectDB(process.env.STRING_CONNECTION_MONGODB);
 

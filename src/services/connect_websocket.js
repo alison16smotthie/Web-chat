@@ -29,7 +29,9 @@ class Websocket_Connection{
         let countUsers = this.countUsers;
         let countMessages = this.countMessages;
 
-        io.on('connection',socket => {     
+        io.on('connection',socket => {   
+            
+            console.log("User connected " + socket.id);
            
             socket.on('joinRoom', ({username, room}) => {
                 
