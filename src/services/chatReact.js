@@ -10,7 +10,7 @@ class ChatReactService{
 
       io.on("connection",function (socket) {
 
-          console.log("User connected " + socket.id);
+        //   console.log("User connected " + socket.id);
       
           socket.on("join_room", function (data) {
       

@@ -26,12 +26,10 @@ const io = new Server(server,{
     },
 });
 
-// route.webInit(app);
-// Websocket_Connection.connectToClient(io);
-// Websocket_Connection.connectWebChat(io);
+route.webInit(app);
+Websocket_Connection.connectToClient(io);
+Websocket_Connection.connectWebChat(io);
 ChatReactService.chatService(io);
-
-
 database_connection.connectDB(process.env.STRING_CONNECTION_MONGODB);
 
 server.listen(port,async () => {
