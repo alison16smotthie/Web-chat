@@ -14,9 +14,9 @@ class homeController {
 
     index = async (req, res, next)=>{
         
-        renderView.render_database(User_db ,req, res , next, 'index.cl7');
+        // renderView.render_database(User_db ,req, res , next, 'index.cl7');
 
-        // return res.sendStatus(200);
+        return res.sendStatus(200);
     }
     
     postHome = async (req, res, next)=>{
