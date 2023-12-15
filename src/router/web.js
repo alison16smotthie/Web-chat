@@ -3,6 +3,7 @@ let router = express.Router();
 const {ChatRoute} = require('./chat');
 const {HomeRoute} = require('./home');
 const {CompanyRoute} = require('./company');
+const {BlogRoute} = require('./blog');
 const {bot_facebook} = require('../controller/botFbController');
 const {postWebhook, getWebhook} = require('../controller/botFbController');
 
@@ -14,6 +15,7 @@ let webInit = (app) => {
     app.post('/webhook', postWebhook);
     app.use('/chat', ChatRoute.Router());
     app.use('/company-api', CompanyRoute.Router());
+    app.use('/blog-api', BlogRoute.Router());
 
     app.use('/', HomeRoute.Router());
 }

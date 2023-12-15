@@ -23,7 +23,7 @@ class HomeRoute{
       this.router.post('/', homePage.postHome);
       this.router.post('/contact', homePage.postcontact);
       this.router.post('/message', homePage.postmessage);
-      this.router.post('/store', homePage.postStore);
+      this.router.post('/company-store', homePage.postStore);
       this.router.post('/account', homePage.postLogin);
       this.router.post('/apiLogin', homePage.postApiLogin);
 

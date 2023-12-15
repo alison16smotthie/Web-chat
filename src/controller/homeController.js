@@ -79,9 +79,9 @@ class homeController {
  
         try{
 
-            const car = new User_db(req.body);
+            const data = new User_db(req.body);
        
-            car.save();
+            data.save();
 
             res.redirect('/company');
 
