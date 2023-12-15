@@ -79,7 +79,6 @@ class Websocket_Connection{
 
                 const user = getUsers(socket.id);
 
-
                 this.message = `${guest} tại phòng ${user.room} vừa nhắn tin ${msg}`;
     
                 bot.findKeyChat().then(async () => {

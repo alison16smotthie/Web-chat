@@ -17,47 +17,8 @@ socket.on('roomUsers', function user({room,users}){
 
     getRoom(room);
     clientGetUsers(users);
+    userWelcome();
 });
-
-socket.on('message',async message => {
-
-    console.log(message);
-    countUser.innerHTML = message.countUsers;
-    sendMessage(message);
-    await asyncCallAutoMsg(message, message.automatic); 
-});
-
-
-chatForm.addEventListener('submit', (e) => {
-    
-    e.preventDefault();
-    const msg = e.target.elements.text.value;
-    socket.emit('chatMessage',msg); 
-    e.target.elements.text.value = ''; 
-    e.target.elements.text.focus(); 
-    
-});
-
-function getRoom(room){
-
-    roomName.innerHTML = `${room}`;
-}
-
-
-function scan_keywords(...keywords) {
-
-    let str = "";
-
-    for (var i = 0; i < keywords.length; i++) {
-
-        if (i < keywords.length) {
-
-            str += `<li>${keywords[i]}</li>`;
-        }
-    }
-
-    return str;
-}
 
 
 function clientGetUsers(users){
@@ -65,7 +26,15 @@ function clientGetUsers(users){
     usersName.innerHTML = `${users.map(user =>
 
         `<li>${user.username}</li>`).join(" ")
-    }`;
+    }`;    
+}
+
+function getRoom(room){
+
+    roomName.innerHTML = `${room}`;
+}
+
+function userWelcome(){
 
     const keywords = [
 
@@ -90,8 +59,46 @@ function clientGetUsers(users){
     </div>
     
     `;
-    
 }
+
+
+socket.on('message',async message => {
+
+    console.log(message);
+    countUser.innerHTML = message.countUsers;
+    sendMessage(message);
+    await asyncCallAutoMsg(message, message.automatic); 
+});
+
+
+chatForm.addEventListener('submit', (e) => {
+    
+    e.preventDefault();
+    const msg = e.target.elements.text.value;
+    socket.emit('chatMessage',msg); 
+    e.target.elements.text.value = ''; 
+    e.target.elements.text.focus(); 
+    
+});
+
+
+
+function scan_keywords(...keywords) {
+
+    let str = "";
+
+    for (var i = 0; i < keywords.length; i++) {
+
+        if (i < keywords.length) {
+
+            str += `<li>${keywords[i]}</li>`;
+        }
+    }
+
+    return str;
+}
+
+
 
 
 
