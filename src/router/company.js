@@ -1,5 +1,5 @@
 const express = require('express');
-const {middleware} = require('../middleware/middleware');
+const {middleware_company} = require('../middleware/middleware_company');
 const {company_api} = require('../controller/api/api_CompanyController.js');
 
 class CompanyRoute{
@@ -11,7 +11,7 @@ class CompanyRoute{
 
   Router(){
 
-      this.router.get('/',company_api.index);
+      this.router.get('/',middleware_company.middlewareCompany,company_api.index);
 
       return this.router;
 

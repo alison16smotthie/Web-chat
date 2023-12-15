@@ -1,5 +1,6 @@
 const express = require('express');
 const readline = require('readline');
+require('dotenv').config();
 
 class middleware {
 
@@ -39,6 +40,8 @@ class middleware {
 
         res.redirect('/');
     }
+
+
 
     
      middlewareChat = async (req, res, next) => {
