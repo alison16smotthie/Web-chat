@@ -19,6 +19,12 @@ viewEngine.configViewEngine(app, bodyParser, handleBars,
 process.env.SESSION_SECRET, process.env.SESSION_ALGORITHM); 
 const io = new Server(server,{
 
+    reconnection: true,
+    reconnectionAttempts: Infinity, 
+    reconnectionDelay: 1000,
+    reconnectionDelayMax: 5000, 
+    randomizationFactor: 0.5,
+
     cors:{
 
         origin:process.env.ACCESS_ALL,

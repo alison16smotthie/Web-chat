@@ -19,9 +19,10 @@ class ChatReactService{
               const user = userJoin(socket.id,data.username, data.room);
               socket.join(user.room);
               const dataUsers =  {room : user.room,users : getRoomUsers(user.room)};
-              console.log(dataUsers);
+              console.table(dataUsers.users);
 
               io.to(user.room).emit('room_users',dataUsers);
+              socket.broadcast.to(user.room).emit('user_join_room',{room : data.room,username : data.username});
 
           });
       
@@ -29,13 +30,12 @@ class ChatReactService{
           socket.on("send_message", function (data) {
       
               console.table(data);
-              socket.to(data.room).emit("receive_message",data);
+              socket.broadcast.to(data.room).emit("receive_message",data);
           })
       
           socket.on("disconnect", function () {
 
               const user = usersLeaveRoom(socket.id);
-              console.log(user);
 
               if(user) {
 
@@ -51,14 +51,13 @@ class ChatReactService{
           socket.on("leave_room", function () {
 
               const user = usersLeaveRoom(socket.id);
-              console.log(user);
 
               if(user) {
 
                 const dataUsers = {room : user.room,users: getRoomUsers(user.room)};
-                io.to(user.room).emit('room_users', dataUsers);
+                console.log(user, " leave room!!!");
                 io.to(user.room).emit('user_left_room', { username: user.username, room: user.room });
-
+                io.to(user.room).emit('room_users', dataUsers);
               }
           });
       });
