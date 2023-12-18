@@ -2,7 +2,7 @@ const {User, validate} = require("../models/users_db");
 const express = require('express');
 const readline = require('readline');
 const JOI = require("joi");
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcryptjs");
 require('dotenv').config();
 
 
@@ -51,9 +51,9 @@ class middleware_auth {
         }
     
         const validPassword = await bcrypt.compare(
-          req.body.password,
-          user.password
-        );
+          req.body.password, 
+          user.password);
+
   
         if (!validPassword){
   

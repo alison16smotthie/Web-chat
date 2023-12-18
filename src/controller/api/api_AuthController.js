@@ -1,6 +1,6 @@
 require("dotenv").config();
 const {User} = require("../../models/users_db");
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcryptjs");
 const JOI = require("joi");
 
 class api_AuthController {
@@ -78,8 +78,9 @@ class api_AuthController {
 
     store = async (req, res, next)=>{
           
-      const salt = await bcrypt.genSalt(Number(process.env.SALT));
-      const hashPassword = await bcrypt.hash(req.body.password, salt);
+      const salt = bcrypt.genSaltSync(Number(process.env.SALT));
+      const hashPassword = bcrypt.hashSync(req.body.password, salt);
+      const isPasswordValid = bcrypt.compareSync(req.body.password, hashPassword);
       await new User({ ...req.body, password: hashPassword }).save();
 
       res.status(201).send({ message: "User created successfully" });

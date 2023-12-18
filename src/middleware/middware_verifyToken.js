@@ -2,7 +2,6 @@ const {User, validate} = require("../models/users_db");
 const express = require('express');
 const readline = require('readline');
 const JOI = require("joi");
-const bcrypt = require("bcrypt");
 const jwt = require('jsonwebtoken');
 require('dotenv').config();
 
