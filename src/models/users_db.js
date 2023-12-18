@@ -1,5 +1,8 @@
 const mongoose = require('mongoose');
+const passwordComplexity = require('joi-password-complexity');
 const Schema = mongoose.Schema;
+const jwt = require('jsonwebtoken');
+const Joi = require("joi");
 
 const User_db = new Schema(
     
@@ -51,18 +54,47 @@ const User_send_message = new Schema(
     },
 );
 
-const Account = new Schema(
+const Account = new mongoose.Schema(
     {
-        username : {type : String, maxLength: 600},
-        password : {type : String, maxLength: 600},
+        firstName: { type: String, required: true },
+        lastName: { type: String, required: true },
+        email: { type: String, required: true },
+        password: { type: String, required: true },
         createdAt : {type : Date, default: Date.now}, 
         updatedAt : {type : Date, default: Date.now}, 
     },
 );
 
+Account.methods.generateAuthToken = function(){
+
+    const token = jwt.sign(
+        { _id: this._id }, 
+        process.env.JWT_PRIVATE_KEY, {
+		expiresIn: "1m",
+	});
+
+    return token;
+}
+
+const User = mongoose.model('Account', Account);
+
+const validate = (data) => {
+
+	const schema = Joi.object({
+
+		firstName: Joi.string().required().label("FirstName"),
+		lastName: Joi.string().required().label("LastName"),
+		email: Joi.string().email().required().label("Email"),
+		password: passwordComplexity().required().label("Password"),
+	});
+
+	return schema.validate(data);
+};
 
 module.exports = {
     
+    User,
+    validate,
     User_db : mongoose.model('User_db', User_db),
     Title_web : mongoose.model('Title_web', Title_web),
     Key_chat : mongoose.model('Key_chat', Key_chat),

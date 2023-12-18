@@ -15,9 +15,7 @@ class api_CompanyController {
 
         }).catch(err =>{
 
-            console.log("The process of calling the company API is being interrupted: " + err);
-
-            res.render('index.cl7');
+            res.status(500).render('index.cl7');
         });
     }
 }

@@ -2,10 +2,13 @@ const express = require('express');
 const session = require('express-session');
 const flash = require('express-flash');
 const cors = require('cors');
+const cookieParser =require("cookie-parser");
 require("dotenv").config();
 const path = require('path');
 
 let configViewEngine = (app, bodyParser, handlebars, SESSION_SECRET, SESSION_ALGORITHM) =>{
+
+    app.use(cookieParser());
 
     app.use(session({
 
@@ -21,8 +24,9 @@ let configViewEngine = (app, bodyParser, handlebars, SESSION_SECRET, SESSION_ALG
         
         origin: process.env.ACCESS_ALL,
         methods: 'GET,POST,PUT,DELETE',
-        allowedHeaders: 'X-Requested-With,content-type',
-        credentials: true
+        allowedHeaders: ['Content-Type', 'Authorization'],
+        credentials: true,
+        // allowedHeaders: 'X-Requested-With,content-type',
 
     }));
 
@@ -43,13 +47,4 @@ module.exports = {
     
     configViewEngine : configViewEngine
 };
-    
-  
-
-
-
-
-
-
-
 

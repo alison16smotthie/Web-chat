@@ -12,15 +12,21 @@ class middleware_blog {
 
     middlewareBlog = async (req, res, next)=> {
 
-        if(req.query.access_key === process.env.access_key){
+        const accessKey = req.get('Authorization');
 
-            return next();
-        } 
+        if (!accessKey || !accessKey.startsWith('Bearer ')) {
 
-        res.send({
+            return res.status(401).json({ error: 'Bạn không có quyền truy cập!!!'});
+        }
 
-            "message": "Ban khong co quyen truy cap!!!"
-        });
+        const providedAccessKey = accessKey.split(' ')[1];
+
+        if (providedAccessKey !== process.env.access_key) {
+
+            return res.status(403).json({ error: 'Forbidden' });
+        }
+    
+        return next();
     }
 
 

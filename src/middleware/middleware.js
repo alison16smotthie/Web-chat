@@ -38,7 +38,7 @@ class middleware {
             return next();
         } 
 
-        res.redirect('/');
+        res.status(401).render('index.cl7');
     }
 
 

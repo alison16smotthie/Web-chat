@@ -98,13 +98,3 @@ function scan_keywords(...keywords) {
     return str;
 }
 
-
-
-
-
-
-
-
-
-
-

@@ -50,33 +50,3 @@ socket.on('company_api',async company => {
 
     
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
