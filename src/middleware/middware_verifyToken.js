@@ -25,7 +25,7 @@ class middleware_verifyToken {
           
           if (err) {
 
-            console.log("Token quá hạn logout!!!");
+            console.log("Token hết hạn đăng xuất!!!");
 
             return res.status(401).send({ message: 'Token không hợp lệ!' });
           }
@@ -39,11 +39,11 @@ class middleware_verifyToken {
         
       } catch (error) {
 
-        console.log(error);
+        console.log("Verify Server Error: ",error);
       
         res.status(500).send({ 
 
-          message: "Internal Server Error!" 
+          message: "Internal Server Error!" + error
         
         });
       }

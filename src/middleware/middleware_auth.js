@@ -79,11 +79,11 @@ class middleware_auth {
         
       } catch (error) {
 
-          console.log(error);
+          console.log("Auth Login Server Error: ",error);
         
           res.status(500).send({ 
 
-            message: "Internal Server Error!" 
+            message: "Internal Server Error!" + error
           });
       }
     }
@@ -129,11 +129,11 @@ class middleware_auth {
 
       }catch(error){
 
-        console.log(error);
+        console.log("Auth Register Server Error: ",error);
         
         return res.status(500).send({ 
 
-          message: "Internal Server Error!" 
+          message: "Internal Server Error!" + error
         });
       }
     }

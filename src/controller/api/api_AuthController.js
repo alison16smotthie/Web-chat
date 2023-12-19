@@ -19,7 +19,10 @@ class api_AuthController {
 
     index = async (req, res, next) => {
 
-      return res.status(200).send({message: "success"})
+      return res.status(200).send({
+        
+        message: "success"
+      })
     }
 
     login = async (req, res, next) => {
@@ -41,7 +44,6 @@ class api_AuthController {
         res.cookie('username', `${user.firstName} ${user.lastName}`, {
           sameSite: 'none',
           path: '/',
-          // expires: new Date(Date.now() + 60 * 60 * 1000),
           expires: new Date(Date.now() + 30000),httpOnly: true,
           httpOnly: true,
           secure: true
@@ -50,7 +52,6 @@ class api_AuthController {
         res.cookie('email', user.email, {
           sameSite: 'none',
           path: '/',
-          // expires: new Date(Date.now() + 60 * 60 * 1000),
           expires: new Date(Date.now() + 30000),httpOnly: true,
           httpOnly: true,
           secure: true
@@ -66,24 +67,40 @@ class api_AuthController {
 
       } catch (error) {
 
-        console.log(error);
+        console.log("Login Server Error: ",error);
 
         res.status(500).send({ 
-          message: error
+
+          message: "Internal Server Error!" + error
         });
       }
     };
-    
-    
+  
 
     store = async (req, res, next)=>{
           
-      const salt = bcrypt.genSaltSync(Number(process.env.SALT));
-      const hashPassword = bcrypt.hashSync(req.body.password, salt);
-      const isPasswordValid = bcrypt.compareSync(req.body.password, hashPassword);
-      await new User({ ...req.body, password: hashPassword }).save();
+      try{
 
-      res.status(201).send({ message: "User created successfully" });
+        const salt = bcrypt.genSaltSync(Number(process.env.SALT));
+        const hashPassword = bcrypt.hashSync(req.body.password, salt);
+        const isPasswordValid = bcrypt.compareSync(req.body.password, hashPassword);
+        await new User({ ...req.body, password: hashPassword }).save();
+  
+        res.status(201).send({ 
+      
+          message: "User created successfully"
+        });
+
+      }catch (error){
+
+        console.log("Register Server Error: ",error);
+
+        res.status(500).send({ 
+
+          message: "Internal Server Error!" + error
+        });
+      }
+    
     }
 
 }
