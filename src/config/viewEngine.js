@@ -26,8 +26,6 @@ let configViewEngine = (app, bodyParser, handlebars, SESSION_SECRET, SESSION_ALG
         methods: 'GET,POST,PUT,DELETE',
         allowedHeaders: ['Content-Type', 'Authorization'],
         credentials: true,
-        // allowedHeaders: 'X-Requested-With,content-type',
-
     }));
 
     app.use(flash());
