@@ -70,7 +70,7 @@ Account.methods.generateAuthToken = function(){
     const token = jwt.sign(
         { _id: this._id }, 
         process.env.JWT_PRIVATE_KEY, {
-		expiresIn: "1m",
+		expiresIn: "20s",
 	});
 
     return token;

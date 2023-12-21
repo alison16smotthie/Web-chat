@@ -21,7 +21,7 @@ class api_AuthController {
 
       return res.status(200).send({
         
-        message: "success"
+        message: "Login success"
       })
     }
 
@@ -100,7 +100,6 @@ class api_AuthController {
           message: "Internal Server Error!" + error
         });
       }
-    
     }
 
 }
