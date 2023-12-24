@@ -43,7 +43,7 @@ class middleware_verifyToken {
       
         res.status(500).send({ 
 
-          message: "Internal Server Error!" + error
+          message: "Internal Verify Server Error!" + error
         
         });
       }
