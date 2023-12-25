@@ -27,7 +27,7 @@ class middleware_verifyToken {
 
             console.log("Token hết hạn đăng xuất!!!");
 
-            return res.status(401).send({ message: 'Token không hợp lệ!' });
+            return res.status(401).send({ message: 'Hết hạn đăng nhập!\nToken không hợp lệ!' });
           }
           
           req.user = decoded;
