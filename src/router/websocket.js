@@ -24,6 +24,7 @@ let webSocketInit = (io) => {
       } catch (error) {
 
         console.error("Socket authentication error:", error.message);
+        
         next(new Error("Authentication error"));
       }
   });  

@@ -24,8 +24,15 @@ class ChatReactService{
               io.to(user.room).emit('room_users',dataUsers);
               socket.broadcast.to(user.room).emit('user_join_room',{room : data.room,username : data.username});
 
+              socket.on("user_chat_now", function (chat_input_data) {
+
+                const msg = {
+                    message: `${chat_input_data.author} đang chat`,
+                    status: true,
+                };
+                socket.broadcast.to(user.room).emit('user_guest_chat_now',msg);
+            });
           });
-      
       
           socket.on("send_message", function (data) {
       
