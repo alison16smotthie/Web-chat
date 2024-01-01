@@ -29,7 +29,7 @@ let configViewEngine = (app, bodyParser, handlebars, SESSION_SECRET, SESSION_ALG
     app.options("*", cors());
 
     app.use(cors({
-        origin: process.env.ACCESS_ALL,
+        origin: "*",
         methods: 'GET,POST,PUT,DELETE',
         allowedHeaders: ['Content-Type', 'Authorization', 'X-CSRF-Token'],
         credentials: true,
