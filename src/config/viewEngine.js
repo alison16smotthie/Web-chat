@@ -12,8 +12,6 @@ let configViewEngine = (app, bodyParser, handlebars, SESSION_SECRET, SESSION_ALG
 
     app.use(cookieParser());
 
-    // app.use(morgan('combined'));
-
     app.use(session({
 
         secret: SESSION_SECRET,
@@ -30,7 +28,7 @@ let configViewEngine = (app, bodyParser, handlebars, SESSION_SECRET, SESSION_ALG
     // app.use(csrf({ cookie: true }));
 
     app.use(cors({
-        origin: process.env.ACCESS_ALL || '*',
+        origin: process.env.REACT_APP_HOSTNAME || 'http://localhost:3000',
         methods: 'GET,POST,PUT,DELETE,OPTIONS',
         allowedHeaders: ['Content-Type', 'Authorization', 'X-CSRF-Token'],
         credentials: true,
