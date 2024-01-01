@@ -37,7 +37,6 @@ let configViewEngine = (app, bodyParser, handlebars, SESSION_SECRET, SESSION_ALG
         exposedHeaders: ['X-CSRF-Token'],
     }));
 
-    app.use(cors());
 
     app.use(flash());
     app.use(express.static("./src/public"));
