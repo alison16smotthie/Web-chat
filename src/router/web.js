@@ -21,16 +21,7 @@ let webInit = (app) => {
     app.use('/company-api', CompanyRoute.Router());
     app.use('/blog-api', BlogRoute.Router());
     app.use('/weather-api', WeatherRoute.Router());
-    app.use('/auth-api', cors({
-
-        origin: process.env.REACT_APP_HOSTNAME || "https://webchat-react-app1.vercel.app/",
-        methods: 'GET,POST,PUT,DELETE,OPTIONS',
-        allowedHeaders: ['Content-Type', 'Authorization', 'X-CSRF-Token'],
-        credentials: true,
-        optionsSuccessStatus: 204,
-        exposedHeaders: ['X-CSRF-Token'],
-
-    }), AuthRoute.Router());
+    app.use('/auth-api', AuthRoute.Router());
       
 
     app.use('/', HomeRoute.Router());

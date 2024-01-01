@@ -15,11 +15,7 @@ class middleware_verifyToken {
 
     middlewareVerify = async (req, res, next)=> {
 
-      res.header('Access-Control-Allow-Origin', process.env.REACT_APP_HOSTNAME);
-      res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
-      res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization','X-CSRF-Token');
-      res.header('Access-Control-Allow-Credentials', 'true');
-    
+     
       try {
 
         jwt.verify(req.cookies.token, process.env.JWT_PRIVATE_KEY, (err, decoded) => {
