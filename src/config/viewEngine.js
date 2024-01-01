@@ -29,13 +29,13 @@ let configViewEngine = (app, bodyParser, handlebars, SESSION_SECRET, SESSION_ALG
 
     // app.use(csrf({ cookie: true }));
 
-    // app.use(cors({
-    //     origin: "https://webchat-react-app1.vercel.app",
-    //     methods: 'GET,POST,PUT,DELETE,OPTIONS',
-    //     allowedHeaders: ['Content-Type', 'Authorization', 'X-CSRF-Token'],
-    //     credentials: true,
-    //     exposedHeaders: ['X-CSRF-Token'],
-    // }));
+    app.use(cors({
+        origin: "https://webchat-react-app1.vercel.app",
+        methods: 'GET,POST,PUT,DELETE,OPTIONS',
+        allowedHeaders: ['Content-Type', 'Authorization', 'X-CSRF-Token'],
+        credentials: true,
+        exposedHeaders: ['X-CSRF-Token'],
+    }));
 
     app.use(cors());
 
