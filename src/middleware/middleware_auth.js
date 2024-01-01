@@ -3,6 +3,7 @@ const express = require('express');
 const readline = require('readline');
 const JOI = require("joi");
 const bcrypt = require("bcryptjs");
+const {auth_api} = require('../controller/api/api_AuthController');
 require('dotenv').config();
 
 
@@ -18,23 +19,29 @@ class middleware_auth {
 
         email: JOI.string().email().required().label("Email"),
         password: JOI.string().required().label("Password"),
+
       });
 
       return schema.validate(data);
     }
 
-    middlewareLogin = async (req, res, next)=> {
-    
+    middlewareLogin = async (err,req, res, next)=> {
+ 
       try {
 
-        const { error } = this.validate(req.body);
+        const csrfToken = await auth_api.getCsrfTokenGenerate();
+        const { error } = this.validate(req.body.data);
         const accessKey = req.get('Authorization');
         const user = await User.findOne({
 
-           email: req.body.email 
+           email: req.body.data.email 
         });
 
+        console.log("Check csrf token: ", csrfToken);
+
         if(error){
+
+          console.log(error.details[0].message);
 
           return res.status(400).send({ 
 
@@ -51,7 +58,7 @@ class middleware_auth {
         }
     
         const validPassword = await bcrypt.compare(
-          req.body.password, 
+          req.body.data.password, 
           user.password);
 
   
@@ -65,15 +72,31 @@ class middleware_auth {
 
         if (!accessKey || !accessKey.startsWith('Bearer ')) {
 
-          return res.status(401).send({ message: 'Bạn không có quyền truy cập!!!'});
+          return res.status(401).send({ 
+
+            message: 'Bạn không có quyền truy cập!!!'
+          });
         }
 
         const providedAccessKey = accessKey.split(' ')[1];
 
-        if (providedAccessKey !== process.env.access_key) {
+        if (providedAccessKey !== csrfToken) {
 
-            return res.status(403).send({ message: 'Forbidden' });
+            return res.status(403).send({ 
+
+              message: 'Bạn không có quyền truy cập!!!' 
+            });
         }
+
+        if (req.body.csrf_token !== csrfToken) {
+
+          console.log("Invalid csrf token!!!");
+
+          return res.status(401).send({ 
+
+            message: 'Bạn không có quyền truy cập!!!' 
+          });
+      }
 
         next();
         
@@ -89,6 +112,7 @@ class middleware_auth {
     }
 
     middlewareRegister = async (req, res, next)=> {
+
 
       try{
 

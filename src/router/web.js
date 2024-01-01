@@ -6,13 +6,14 @@ const {CompanyRoute} = require('./company');
 const {BlogRoute} = require('./blog');
 const {AuthRoute} = require('./auth');
 const {WeatherRoute} = require('./weather');
-
+const cors = require('cors');
 const {bot_facebook} = require('../controller/botFbController');
 const {postWebhook, getWebhook} = require('../controller/botFbController');
 
 
 let webInit = (app) => {
 
+     
     app.get('/botfb', bot_facebook.index);
     app.get('/webhook', getWebhook)
     app.post('/webhook', postWebhook);
@@ -21,6 +22,8 @@ let webInit = (app) => {
     app.use('/blog-api', BlogRoute.Router());
     app.use('/weather-api', WeatherRoute.Router());
     app.use('/auth-api', AuthRoute.Router());
+
+      
 
     app.use('/', HomeRoute.Router());
 }

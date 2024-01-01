@@ -5,6 +5,11 @@ const JOI = require("joi");
 
 class api_AuthController {
 
+
+    constructor() {
+
+      this.csrfToken = null;
+    }
   
     validate = (data) =>{
 
@@ -19,17 +24,42 @@ class api_AuthController {
 
     index = async (req, res, next) => {
 
+      this.csrfToken = req.csrfToken();
+
+      console.log("New csrf token: ", this.csrfToken);
+
+      // res.cookie('csrf_token', this.csrfToken, {
+      //     sameSite: 'Strict',
+      //     path: '/',
+      //     maxAge: 60 * 1000,
+      //     httpOnly: true,
+      //     secure: true,
+      // });
+
       return res.status(200).send({
         
-        message: "Login success"
-      })
+          csrf: this.csrfToken,
+      });
+    }
+
+    getCsrfTokenGenerate = async ()=>{
+
+      return this.csrfToken;
+    }
+
+    account = async (req, res, next) => {
+
+      return res.status(200).send({
+        
+        message: "Login success",
+      });
     }
 
     login = async (req, res, next) => {
 
       try {
 
-        const user = await User.findOne({ email: req.body.email });
+        const user = await User.findOne({ email: req.body.data.email });
         const token = user.generateAuthToken();
 
         console.log("User login: ", user);
@@ -37,26 +67,24 @@ class api_AuthController {
         res.cookie('token', token, {
             sameSite: 'none',
             path: '/',
-            expires: new Date(Date.now() + 30000),httpOnly: true,
+            maxAge: 60*1000,
+            httpOnly: true,
             secure: true
 		    });
 
         res.cookie('username', `${user.firstName} ${user.lastName}`, {
           sameSite: 'none',
           path: '/',
-          expires: new Date(Date.now() + 30000),httpOnly: true,
-          httpOnly: true,
+          maxAge: 60*60*1000,
           secure: true
         });
 
         res.cookie('email', user.email, {
           sameSite: 'none',
           path: '/',
-          expires: new Date(Date.now() + 30000),httpOnly: true,
-          httpOnly: true,
+          maxAge: 60*60*1000,
           secure: true
         });
-
     
         res.status(200).send({
           data: token,

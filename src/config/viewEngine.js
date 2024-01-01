@@ -2,7 +2,9 @@ const express = require('express');
 const session = require('express-session');
 const flash = require('express-flash');
 const cors = require('cors');
-const cookieParser =require("cookie-parser");
+const cookieParser = require("cookie-parser");
+const csrf = require('csurf');
+const csrfProtection = csrf({ cookie: true });
 require("dotenv").config();
 const path = require('path');
 
@@ -16,16 +18,20 @@ let configViewEngine = (app, bodyParser, handlebars, SESSION_SECRET, SESSION_ALG
         algorithm: SESSION_ALGORITHM,
         resave: false,
         saveUninitialized: true,
-        cookie:{secure: false,httpOnly : true,maxAge: 5 * 60 *1000}
+        cookie:{secure: false,httpOnly : true,maxAge: 60 * 60 *1000}
 
     }));
 
+    // app.use(csrf({ cookie: true }));
+
     app.use(cors({
         
-        origin: process.env.ACCESS_ALL,
+        origin: "http://localhost:3000",
         methods: 'GET,POST,PUT,DELETE',
-        allowedHeaders: ['Content-Type', 'Authorization'],
+        allowedHeaders: ['Content-Type', 'Authorization', 'X-CSRF-Token'],
         credentials: true,
+        optionsSuccessStatus: 204,
+
     }));
 
     app.use(flash());
@@ -43,6 +49,7 @@ let configViewEngine = (app, bodyParser, handlebars, SESSION_SECRET, SESSION_ALG
 
 module.exports = {
     
-    configViewEngine : configViewEngine
+    configViewEngine : configViewEngine,
+    csrfProtection : csrfProtection
 };
 

@@ -14,20 +14,22 @@ class middleware_verifyToken {
 
 
     middlewareVerify = async (req, res, next)=> {
+
     
       try {
 
-        const accessToken = req.get('Authorization');
-
-        const token = accessToken.split(' ')[1];
-
-        jwt.verify(token, process.env.JWT_PRIVATE_KEY, (err, decoded) => {
+        jwt.verify(req.cookies.token, process.env.JWT_PRIVATE_KEY, (err, decoded) => {
           
           if (err) {
 
             console.log("Token hết hạn đăng xuất!!!");
 
-            return res.status(401).send({ message: 'Hết hạn đăng nhập!\nToken không hợp lệ!' });
+            res.cookie("test", "test cookie");
+
+            return res.status(401).send({
+
+               message: 'Hết hạn đăng nhập!\nToken không hợp lệ!',
+            });
           }
           
           req.user = decoded;
@@ -38,6 +40,11 @@ class middleware_verifyToken {
 
         
       } catch (error) {
+
+        res.cookie("test", "test cookie");
+
+        console.log("cookie: ",req.cookies);
+
 
         console.log("Verify Server Error: ",error);
       
