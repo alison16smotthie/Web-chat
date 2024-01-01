@@ -25,13 +25,12 @@ let configViewEngine = (app, bodyParser, handlebars, SESSION_SECRET, SESSION_ALG
     // app.use(csrf({ cookie: true }));
 
     app.use(cors({
-        
         origin: process.env.ACCESS_ALL,
         methods: 'GET,POST,PUT,DELETE',
         allowedHeaders: ['Content-Type', 'Authorization', 'X-CSRF-Token'],
         credentials: true,
         optionsSuccessStatus: 204,
-
+        exposedHeaders: ['X-CSRF-Token'],
     }));
 
     app.use(flash());
