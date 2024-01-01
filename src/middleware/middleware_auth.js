@@ -27,8 +27,7 @@ class middleware_auth {
 
     middlewareLogin = async (err,req, res, next)=> {
 
-      console.log('Middleware Login Called');
-
+      console.log('Middleware Login Called!!!');
  
       try {
 
