@@ -23,8 +23,6 @@ class middleware_verifyToken {
 
             console.log("Token hết hạn đăng xuất!!!");
 
-            res.cookie("test", "test cookie");
-
             return res.status(401).send({
 
                 message: 'Hết hạn đăng nhập!\nToken không hợp lệ!',
@@ -39,11 +37,6 @@ class middleware_verifyToken {
 
         
       } catch (error) {
-
-        res.cookie("test", "test cookie");
-
-        console.log("cookie: ",req.cookies);
-
 
         console.log("Verify Server Error: ",error);
       

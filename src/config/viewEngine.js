@@ -36,7 +36,6 @@ let configViewEngine = (app, bodyParser, handlebars, SESSION_SECRET, SESSION_ALG
         methods: 'GET,POST,PUT,DELETE,OPTIONS',
         allowedHeaders: ['Content-Type', 'Authorization', 'X-CSRF-Token'],
         credentials: true,
-        // optionsSuccessStatus: 204,
         exposedHeaders: ['X-CSRF-Token'],
     }));
 
