@@ -29,7 +29,7 @@ let configViewEngine = (app, bodyParser, handlebars, SESSION_SECRET, SESSION_ALG
 
     // app.use(csrf({ cookie: true }));
 
-    app.options("*", cors());
+    app.options("https://webchat-react-app1.vercel.app", cors());
 
     app.use(cors({
         origin: "https://webchat-react-app1.vercel.app",
