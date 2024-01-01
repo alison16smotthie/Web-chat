@@ -12,7 +12,7 @@ let configViewEngine = (app, bodyParser, handlebars, SESSION_SECRET, SESSION_ALG
 
     app.use(cookieParser());
 
-    app.use(morgan('combined'));
+    // app.use(morgan('combined'));
 
     app.use(session({
 
