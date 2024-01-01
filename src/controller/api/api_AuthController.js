@@ -24,6 +24,11 @@ class api_AuthController {
 
     index = async (req, res, next) => {
 
+      res.header('Access-Control-Allow-Origin', process.env.REACT_APP_HOSTNAME);
+      res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+      res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization','X-CSRF-Token');
+      res.header('Access-Control-Allow-Credentials', 'true');
+
      
       this.csrfToken = req.csrfToken();
 
