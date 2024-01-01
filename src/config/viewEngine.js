@@ -26,7 +26,7 @@ let configViewEngine = (app, bodyParser, handlebars, SESSION_SECRET, SESSION_ALG
 
     app.use(cors({
         
-        origin: "http://localhost:3000",
+        origin: process.env.REACT_APP_HOSTNAME,
         methods: 'GET,POST,PUT,DELETE',
         allowedHeaders: ['Content-Type', 'Authorization', 'X-CSRF-Token'],
         credentials: true,
