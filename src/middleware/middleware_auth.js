@@ -26,6 +26,9 @@ class middleware_auth {
     }
 
     middlewareLogin = async (err,req, res, next)=> {
+
+      console.log('Middleware Login Called');
+
  
       try {
 
@@ -124,7 +127,7 @@ class middleware_auth {
 
           return res.status(400).send({
 
-            message:`REGISTER ERROR: ${error.details[0].message}`
+              message:`REGISTER ERROR: ${error.details[0].message}`
           });
         }
 
@@ -132,7 +135,7 @@ class middleware_auth {
   
           return res.status(409).send({
 
-            message:"User with given email already exists!"
+              message:"User with given email already exists!"
           });
         }
 
@@ -146,7 +149,10 @@ class middleware_auth {
 
         if (providedAccessKey !== process.env.access_key) {
 
-            return res.status(403).send({ message: 'Forbidden' });
+            return res.status(403).send({ 
+              
+                message: 'Forbidden'
+            });
         }
 
         next();
@@ -157,7 +163,7 @@ class middleware_auth {
         
         return res.status(500).send({ 
 
-          message: "Internal Server Error!" + error
+            message: "Internal Server Error!" + error
         });
       }
     }

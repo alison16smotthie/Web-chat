@@ -6,10 +6,13 @@ const cookieParser = require("cookie-parser");
 const csrf = require('csurf');
 require("dotenv").config();
 const path = require('path');
+const morgan = require('morgan');
 
 let configViewEngine = (app, bodyParser, handlebars, SESSION_SECRET, SESSION_ALGORITHM) =>{
 
     app.use(cookieParser());
+
+    app.use(morgan('combined'));
 
     app.use(session({
 
@@ -22,7 +25,8 @@ let configViewEngine = (app, bodyParser, handlebars, SESSION_SECRET, SESSION_ALG
     }));
 
     // app.use(csrf({ cookie: true }));
-    app.options(process.env.ACCESS_ALL, cors());
+
+    app.options("*", cors());
 
     app.use(cors({
         origin: process.env.ACCESS_ALL,

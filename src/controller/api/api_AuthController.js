@@ -72,24 +72,24 @@ class api_AuthController {
 		    });
 
         res.cookie('username', `${user.firstName} ${user.lastName}`, {
-          sameSite: 'none',
-          path: '/',
-          maxAge: 60*60*1000,
-          secure: true
+            sameSite: 'none',
+            path: '/',
+            maxAge: 60*60*1000,
+            secure: true
         });
 
         res.cookie('email', user.email, {
-          sameSite: 'none',
-          path: '/',
-          maxAge: 60*60*1000,
-          secure: true
+            sameSite: 'none',
+            path: '/',
+            maxAge: 60*60*1000,
+            secure: true
         });
     
         res.status(200).send({
-          data: token,
-          email: user.email,
-          username: `${user.firstName} ${user.lastName}`,
-          message: "Đăng nhập thành công",
+            data: token,
+            email: user.email,
+            username: `${user.firstName} ${user.lastName}`,
+            message: "Đăng nhập thành công",
         });
 
       } catch (error) {
@@ -98,7 +98,7 @@ class api_AuthController {
 
         res.status(500).send({ 
 
-          message: "Internal Server Error!" + error
+            message: "Internal Server Error!" + error
         });
       }
     };
@@ -115,7 +115,7 @@ class api_AuthController {
   
         res.status(201).send({ 
       
-          message: "User created successfully"
+            message: "User created successfully"
         });
 
       }catch (error){
@@ -124,7 +124,7 @@ class api_AuthController {
 
         res.status(500).send({ 
 
-          message: "Internal Server Error!" + error
+            message: "Internal Server Error!" + error
         });
       }
     }

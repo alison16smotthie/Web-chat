@@ -1,4 +1,5 @@
 const express = require('express');
+const cors = require('cors');
 let router = express.Router();
 const {ChatRoute} = require('./chat');
 const {HomeRoute} = require('./home');
@@ -6,7 +7,6 @@ const {CompanyRoute} = require('./company');
 const {BlogRoute} = require('./blog');
 const {AuthRoute} = require('./auth');
 const {WeatherRoute} = require('./weather');
-const cors = require('cors');
 const {bot_facebook} = require('../controller/botFbController');
 const {postWebhook, getWebhook} = require('../controller/botFbController');
 
