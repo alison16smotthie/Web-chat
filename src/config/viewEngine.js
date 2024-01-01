@@ -4,7 +4,6 @@ const flash = require('express-flash');
 const cors = require('cors');
 const cookieParser = require("cookie-parser");
 const csrf = require('csurf');
-const csrfProtection = csrf({ cookie: true });
 require("dotenv").config();
 const path = require('path');
 
@@ -23,6 +22,7 @@ let configViewEngine = (app, bodyParser, handlebars, SESSION_SECRET, SESSION_ALG
     }));
 
     // app.use(csrf({ cookie: true }));
+    app.options(process.env.ACCESS_ALL, cors());
 
     app.use(cors({
         origin: process.env.ACCESS_ALL,
@@ -49,6 +49,5 @@ let configViewEngine = (app, bodyParser, handlebars, SESSION_SECRET, SESSION_ALG
 module.exports = {
     
     configViewEngine : configViewEngine,
-    csrfProtection : csrfProtection
 };
 

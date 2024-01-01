@@ -26,11 +26,6 @@ class middleware_auth {
     }
 
     middlewareLogin = async (err,req, res, next)=> {
-
-      res.header('Access-Control-Allow-Origin', process.env.REACT_APP_HOSTNAME);
-      res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
-      res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization','X-CSRF-Token');
-      res.header('Access-Control-Allow-Credentials', 'true');
  
       try {
 
@@ -39,7 +34,7 @@ class middleware_auth {
         const accessKey = req.get('Authorization');
         const user = await User.findOne({
 
-           email: req.body.data.email 
+              email: req.body.data.email 
         });
 
         console.log("Check csrf token: ", csrfToken);
@@ -50,7 +45,7 @@ class middleware_auth {
 
           return res.status(400).send({ 
 
-            message: `LOGIN ERROR: ${error.details[0].message}` 
+              message: `LOGIN ERROR: ${error.details[0].message}` 
           });        
         }   
 
@@ -58,20 +53,20 @@ class middleware_auth {
 
           return res.status(401).send({ 
 
-            message: "Mật khẩu hoặc email không hợp lệ!" 
+              message: "Mật khẩu hoặc email không hợp lệ!" 
           });
         }
     
         const validPassword = await bcrypt.compare(
-          req.body.data.password, 
-          user.password);
+              req.body.data.password, 
+              user.password);
 
   
         if (!validPassword){
   
           return res.status(401).send({ 
 
-            message: "Mật khẩu hoặc email không hợp lệ!" 
+              message: "Mật khẩu hoặc email không hợp lệ!" 
           });
         }
 
@@ -79,7 +74,7 @@ class middleware_auth {
 
           return res.status(401).send({ 
 
-            message: 'Bạn không có quyền truy cập!!!'
+              message: 'Bạn không có quyền truy cập!!!'
           });
         }
 
@@ -89,7 +84,7 @@ class middleware_auth {
 
             return res.status(403).send({ 
 
-              message: 'Bạn không có quyền truy cập!!!' 
+                message: 'Bạn không có quyền truy cập!!!' 
             });
         }
 
@@ -99,19 +94,19 @@ class middleware_auth {
 
           return res.status(401).send({ 
 
-            message: 'Bạn không có quyền truy cập!!!' 
+              message: 'Bạn không có quyền truy cập!!!' 
           });
       }
 
         next();
         
-      } catch (error) {
+      }catch (error) {
 
           console.log("Auth Login Server Error: ",error);
         
           res.status(500).send({ 
 
-            message: "Internal Server Error!" + error
+              message: "Internal Server Error!" + error
           });
       }
     }
