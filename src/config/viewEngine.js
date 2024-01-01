@@ -20,8 +20,11 @@ let configViewEngine = (app, bodyParser, handlebars, SESSION_SECRET, SESSION_ALG
         algorithm: SESSION_ALGORITHM,
         resave: false,
         saveUninitialized: true,
-        cookie:{secure: false,httpOnly : true,maxAge: 60 * 60 *1000}
-
+        cookie:{
+            secure: false,
+            httpOnly : true,
+            sameSite: 'None', 
+            maxAge: 60 * 60 *1000}
     }));
 
     // app.use(csrf({ cookie: true }));
