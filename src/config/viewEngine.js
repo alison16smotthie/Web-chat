@@ -28,8 +28,10 @@ let configViewEngine = (app, bodyParser, handlebars, SESSION_SECRET, SESSION_ALG
 
     app.options("*", cors());
 
+
+    
     app.use(cors({
-        origin: "*",
+        origin: "https://webchat-react-app1.vercel.app",
         methods: 'GET,POST,PUT,DELETE',
         allowedHeaders: ['Content-Type', 'Authorization', 'X-CSRF-Token'],
         credentials: true,
