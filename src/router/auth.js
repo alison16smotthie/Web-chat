@@ -15,6 +15,7 @@ class AuthRoute{
 
     Router(){
 
+        console.log("ENV: ",process.env.REACT_APP_HOSTNAME);
 
         this.router.get('/login',cors({
             origin: process.env.REACT_APP_HOSTNAME || 'http://localhost:3000',

@@ -30,7 +30,7 @@ let configViewEngine = (app, bodyParser, handlebars, SESSION_SECRET, SESSION_ALG
     // app.use(csrf({ cookie: true }));
 
     app.use(cors({
-        origin: process.env.REACT_APP_HOSTNAME || 'http://localhost:3000',
+        origin: process.env.ACCESS_ALL || '*',
         methods: 'GET,POST,PUT,DELETE,OPTIONS',
         allowedHeaders: ['Content-Type', 'Authorization', 'X-CSRF-Token'],
         credentials: true,
