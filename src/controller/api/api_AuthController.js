@@ -74,14 +74,14 @@ class api_AuthController {
         res.cookie('username', `${user.firstName} ${user.lastName}`, {
             sameSite: 'none',
             path: '/',
-            maxAge: 60*60*1000,
+            maxAge: 60*1000,
             secure: true
         });
 
         res.cookie('email', user.email, {
             sameSite: 'none',
             path: '/',
-            maxAge: 60*60*1000,
+            maxAge: 60*1000,
             secure: true
         });
     

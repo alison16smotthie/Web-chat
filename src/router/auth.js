@@ -17,16 +17,8 @@ class AuthRoute{
 
         console.log("ENV: ",process.env.REACT_APP_HOSTNAME);
 
-        this.router.get('/login',cors({
-            origin: process.env.REACT_APP_HOSTNAME || 'http://localhost:3000',
-            methods: 'GET,POST,PUT,DELETE,OPTIONS',
-            allowedHeaders: ['Content-Type', 'Authorization', 'X-CSRF-Token'],
-            credentials: true,
-            optionsSuccessStatus: 204,
-            exposedHeaders: ['X-CSRF-Token'],
-        }),csrfProtection,middleware_auth.middlewareLogin,auth_api.index);
-        
-        this.router.post('/login',middleware_auth.middlewareLogin,auth_api.login);
+        this.router.get('/login',csrfProtection,middleware_auth.middlewareLogin,auth_api.index);
+        this.router.post('/login',csrfProtection,middleware_auth.middlewareLogin,auth_api.login);
 
         this.router.get('/account',cors({
             origin: process.env.REACT_APP_HOSTNAME || 'http://localhost:3000',
