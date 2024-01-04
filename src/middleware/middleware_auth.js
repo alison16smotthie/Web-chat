@@ -26,7 +26,6 @@ class middleware_auth {
     }
 
     middlewareLogin = async (err,req, res, next)=> {
-
      
       console.log('Middleware Login Called!!!');
  
@@ -40,24 +39,23 @@ class middleware_auth {
               email: req.body.data.email 
         });
 
-        console.log("Check csrf token: ", csrfToken);
 
         if(error){
 
-          console.log(error.details[0].message);
+            console.log(error.details[0].message);
 
-          return res.status(400).send({ 
+            return res.status(400).send({ 
 
-              message: `LOGIN ERROR: ${error.details[0].message}` 
-          });        
+                message: `LOGIN ERROR: ${error.details[0].message}` 
+            });        
         }   
 
         if (!user){
 
-          return res.status(401).send({ 
+            return res.status(401).send({ 
 
-              message: "Mật khẩu hoặc email không hợp lệ!" 
-          });
+                message: "Mật khẩu hoặc email không hợp lệ!" 
+            });
         }
     
         const validPassword = await bcrypt.compare(
@@ -67,18 +65,18 @@ class middleware_auth {
   
         if (!validPassword){
   
-          return res.status(401).send({ 
+            return res.status(401).send({ 
 
-              message: "Mật khẩu hoặc email không hợp lệ!!!" 
-          });
+                message: "Mật khẩu hoặc email không hợp lệ!!!" 
+            });
         }
 
         if (!accessKey || !accessKey.startsWith('Bearer ')) {
 
-          return res.status(401).send({ 
+            return res.status(401).send({ 
 
-              message: 'Bạn không có quyền truy cập!!!'
-          });
+                message: 'Bạn không có quyền truy cập!!!'
+            });
         }
 
         const providedAccessKey = accessKey.split(' ')[1];
@@ -93,13 +91,15 @@ class middleware_auth {
 
         if (req.body.csrf_token !== csrfToken) {
 
-          console.log("Invalid csrf token!!!");
+            console.log("Invalid csrf token!!!");
 
-          return res.status(401).send({ 
+            return res.status(401).send({ 
 
-              message: 'Bạn không có quyền truy cập!!!' 
-          });
-      }
+                message: 'Bạn không có quyền truy cập!!!' 
+            });
+        }
+
+        console.log("Check csrf token: ", csrfToken);
 
         next();
         

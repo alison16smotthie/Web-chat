@@ -38,6 +38,8 @@ class middleware {
             return next();
         } 
 
+        console.log("Khong duoc phep vao trang create!!!");
+
         res.status(401).render('index.cl7');
     }
 

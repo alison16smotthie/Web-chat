@@ -15,7 +15,6 @@ class middleware_verifyToken {
 
     middlewareVerify = async (req, res, next)=> {
 
-     
       try {
 
         jwt.verify(req.cookies.token, process.env.JWT_PRIVATE_KEY, (err, decoded) => {
@@ -43,8 +42,7 @@ class middleware_verifyToken {
       
         res.status(500).send({ 
 
-          message: "Internal Verify Server Error!" + error
-        
+            message: "Internal Verify Server Error!" + error
         });
       }
     }

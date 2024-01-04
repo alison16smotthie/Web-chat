@@ -65,6 +65,19 @@ const Account = new mongoose.Schema(
     },
 );
 
+
+const AccountAdmin = new mongoose.Schema(
+    {
+        firstName: { type: String, required: true },
+        lastName: { type: String, required: true },
+        email: { type: String, required: true },
+        password: { type: String, required: true },
+        createdAt : {type : Date, default: Date.now}, 
+        updatedAt : {type : Date, default: Date.now}, 
+    },
+);
+
+
 Account.methods.generateAuthToken = function(){
 
     const token = jwt.sign(
@@ -76,7 +89,16 @@ Account.methods.generateAuthToken = function(){
     return token;
 }
 
-const User = mongoose.model('Account', Account);
+AccountAdmin.methods.generateAuthToken = function(){
+
+    const token = jwt.sign(
+        { _id: this._id }, 
+        process.env.JWT_PRIVATE_KEY, {
+		expiresIn: "1m",
+	});
+
+    return token;
+}
 
 const validate = (data) => {
 
@@ -91,9 +113,13 @@ const validate = (data) => {
 	return schema.validate(data);
 };
 
+const User = mongoose.model('Account', Account);
+const Admin = mongoose.model('AccountAdmin', AccountAdmin);
+
 module.exports = {
     
     User,
+    Admin,
     validate,
     User_db : mongoose.model('User_db', User_db),
     Title_web : mongoose.model('Title_web', Title_web),

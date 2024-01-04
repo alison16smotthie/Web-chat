@@ -1,3 +1,4 @@
+require('dotenv').config();
 
 async function render_database(database, req, res, next, page) {
     
@@ -5,7 +6,10 @@ async function render_database(database, req, res, next, page) {
         const data = await database.find({});
         const mappedData = data.map(item => item.toObject());
 
-        res.render(page, { data: mappedData });
+        res.render(page, { 
+            data: mappedData ,
+            access_token: process.env.PAGE_ACCESS_TOKEN
+        });
 
     } catch (err) {
 

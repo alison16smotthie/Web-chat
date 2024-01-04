@@ -85,6 +85,34 @@
         </form>
     </div>
 
+
+       <div class="create-blog-container">
+        <form action="./admin//register/store" method="POST">
+            <h1>Tạo mới tài khoản</h1>
+            <div class="mb-3">
+                <input type="text" readonly class="form-control" id="access_token" name="access_token" value="{{access_token}}" aria-describedby="emailHelp">
+            </div>
+            <div class="mb-3">
+                <label for="firstName" class="form-label">FirstName</label>
+                <input type="text" class="form-control" id="firstName" name="firstName" aria-describedby="emailHelp">
+            </div>
+            <div class="mb-3">
+                <label for="lastName" class="form-label">LastName</label>
+                <input type="text" class="form-control" id="lastName" name="lastName" aria-describedby="emailHelp">
+            </div>
+            <div class="mb-3">
+                <label for="email" class="form-label">email</label>
+                <input type="text" class="form-control" id="email" name="email" aria-describedby="emailHelp">
+            </div>
+            <div class="mb-3">
+                <label for="password" class="form-label">password</label>
+                <input type="text" class="form-control" id="password" name="password" aria-describedby="emailHelp">
+            </div>
+
+            <button type="submit" class="btn btn-primary">Submit</button>   
+        </form>
+    </div>
+
     
 </div>
 

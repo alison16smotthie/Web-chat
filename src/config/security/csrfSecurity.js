@@ -5,7 +5,6 @@ const cors = require('cors');
 const cookieParser = require("cookie-parser");
 const csrf = require('csurf');
 require("dotenv").config();
-const path = require('path');
 const csrfProtection = csrf({ cookie: true });
 
 
