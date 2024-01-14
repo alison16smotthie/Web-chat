@@ -49,7 +49,6 @@ class ChatReactService{
               const dataUsers = {room : user.room,users: getRoomUsers(user.room)};
               io.to(user.room).emit('room_users', dataUsers);
               io.to(user.room).emit('user_left_room', { username: user.username, room: user.room });
-
             }
     
             console.log("User disconnected " + socket.id);

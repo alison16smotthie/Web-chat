@@ -24,7 +24,6 @@ let webInit = (app) => {
     app.use('/blog-api', BlogRoute.Router());
     app.use('/weather-api', WeatherRoute.Router());
     app.use('/auth-api', AuthRoute.Router());
-    app.use('/auth-api', AuthRoute.Router());
 
     app.use('/', HomeRoute.Router());
 }

@@ -17,7 +17,6 @@ class AdminRoute{
 
         // this.router.get('/login',csrfProtection,middleware_auth.middlewareLogin,auth_api.index);
         // this.router.post('/login',csrfProtection,middleware_auth.middlewareLogin,auth_api.login);
-
         // this.router.get('/account',cors({
         //     origin: 'http://localhost:3000',//process.env.REACT_APP_HOSTNAME || 
         //     methods: 'GET,POST,PUT,DELETE,OPTIONS',

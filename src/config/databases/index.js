@@ -1,7 +1,6 @@
 const mongoose = require('mongoose');
 require('dotenv').config();
 
-
 class database_connection{
 
     async connectDB(string_connection){
@@ -12,15 +11,14 @@ class database_connection{
             useUnifiedTopology: true,
             
         }).then(res => 
+            
+            console.log('connect successfully')
+        
+        ).catch(err => 
 
-            console.log('connect successfully'))
-
-        .catch(err => 
-
-        console.log('connect failed : ', err));
+            console.log('connect failed : ', err));
     }
 }
-
 
 
 module.exports = {

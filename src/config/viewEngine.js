@@ -8,6 +8,25 @@ require("dotenv").config();
 const path = require('path');
 const morgan = require('morgan');
 
+const configWebSocket =()=> {
+
+    return {
+
+        reconnection: true,
+        reconnectionAttempts: Infinity, 
+        reconnectionDelay: 1000,
+        reconnectionDelayMax: 5000, 
+        randomizationFactor: 0.5,
+
+        cors:{
+
+            allowedHeaders: ['Content-Type', 'Authorization'], 
+            origin: process.env.ACCESS_ALL,
+            methods: ["GET", "POST","PUT", "DELETE"],
+        },
+    }
+}
+
 let configViewEngine = (app, bodyParser, handlebars, SESSION_SECRET, SESSION_ALGORITHM) =>{
 
     app.use(cookieParser());
@@ -25,10 +44,8 @@ let configViewEngine = (app, bodyParser, handlebars, SESSION_SECRET, SESSION_ALG
             maxAge: 60 * 60 *1000}
     }));
 
-    // app.use(csrf({ cookie: true }));
-
     app.use(cors({
-        origin: process.env.REACT_APP_HOSTNAME || 'http://localhost:3000',
+        origin: process.env.REACT_APP_HOSTNAME ||'http://localhost:3000',//process.env.REACT_APP_HOSTNAME 
         methods: 'GET,POST,PUT,DELETE,OPTIONS',
         allowedHeaders: ['Content-Type', 'Authorization', 'X-CSRF-Token'],
         credentials: true,
@@ -52,5 +69,6 @@ let configViewEngine = (app, bodyParser, handlebars, SESSION_SECRET, SESSION_ALG
 module.exports = {
     
     configViewEngine : configViewEngine,
+    configWebSocket : configWebSocket,
 };
 

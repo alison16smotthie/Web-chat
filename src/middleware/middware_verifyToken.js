@@ -15,36 +15,34 @@ class middleware_verifyToken {
 
     middlewareVerify = async (req, res, next)=> {
 
-      try {
+        try {
 
-        jwt.verify(req.cookies.token, process.env.JWT_PRIVATE_KEY, (err, decoded) => {
+          jwt.verify(req.cookies.token, process.env.JWT_PRIVATE_KEY, (err, decoded) => {
+            
+              if (err) {
+
+                  console.log("Token hết hạn đăng xuất!!!");
+
+                  return res.status(401).send({
+
+                      message: 'Hết hạn đăng nhập!\nToken không hợp lệ!',
+                  });
+              }
+              
+              req.user = decoded;
+              next();
+
+          });
           
-          if (err) {
+        } catch (error) {
 
-            console.log("Token hết hạn đăng xuất!!!");
+            console.log("Verify Server Error: ",error);
+          
+            res.status(500).send({ 
 
-            return res.status(401).send({
-
-                message: 'Hết hạn đăng nhập!\nToken không hợp lệ!',
+                message: "Internal Verify Server Error!" + error
             });
-          }
-          
-          req.user = decoded;
-    
-          next();
-
-        });
-
-        
-      } catch (error) {
-
-        console.log("Verify Server Error: ",error);
-      
-        res.status(500).send({ 
-
-            message: "Internal Verify Server Error!" + error
-        });
-      }
+        }
     }
 
 }

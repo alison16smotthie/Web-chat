@@ -1,5 +1,5 @@
 require("dotenv").config();
-const {User} = require("../../models/users_db");
+const {User,Admin} = require("../../models/users_db");
 const bcrypt = require("bcryptjs");
 const JOI = require("joi");
 
@@ -42,11 +42,6 @@ class api_AuthController {
 
     account = async (req, res, next) => {
 
-      // res.header('Access-Control-Allow-Origin', process.env.REACT_APP_HOSTNAME);
-      // res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
-      // res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization','X-CSRF-Token');
-      // res.header('Access-Control-Allow-Credentials', 'true');
-
       return res.status(200).send({
         
         message: "Login success",
@@ -55,78 +50,123 @@ class api_AuthController {
 
     login = async (req, res, next) => {
 
+        try {
 
-      try {
+          const admin = await Admin.findOne({ email: req.body.data.email });
 
-        const user = await User.findOne({ email: req.body.data.email });
-        const token = user.generateAuthToken();
+          if(admin){
 
-        console.log("User login: ", user);
-    
-        res.cookie('token', token, {
-            sameSite: 'none',
-            path: '/',
-            maxAge: 60*1000,
-            httpOnly: true,
-            secure: true
-		    });
+              console.log("Admin login: ", admin);
+              const token = admin.generateAuthToken();
 
-        res.cookie('username', `${user.firstName} ${user.lastName}`, {
-            sameSite: 'none',
-            path: '/',
-            maxAge: 60*1000,
-            secure: true
-        });
+              res.cookie('token', token, {
+                  sameSite: 'none',
+                  path: '/',
+                  maxAge: 60*1000,
+                  httpOnly: true,
+                  secure: true
+              });
 
-        res.cookie('email', user.email, {
-            sameSite: 'none',
-            path: '/',
-            maxAge: 60*1000,
-            secure: true
-        });
-    
-        res.status(200).send({
-            data: token,
-            email: user.email,
-            username: `${user.firstName} ${user.lastName}`,
-            message: "Đăng nhập thành công",
-        });
+              res.cookie('role_admin', true, {
+                  sameSite: 'none',
+                  path: '/',
+                  maxAge: 60*1000,
+                  secure: true
+              });
 
-      } catch (error) {
+              res.cookie('username', `${admin.firstName} ${admin.lastName}`, {
+                  sameSite: 'none',
+                  path: '/',
+                  maxAge: 60*1000,
+                  secure: true
+              });
 
-        console.log("Login Server Error: ",error);
+              res.cookie('email', admin.email, {
+                  sameSite: 'none',
+                  path: '/',
+                  maxAge: 60*1000,
+                  secure: true
+              });
+          
+              res.status(200).send({
+                  data: token,
+                  email: admin.email,
+                  username: `${admin.firstName} ${admin.lastName}`,
+                  message: "Đăng nhập thành công",
+              });
 
-        res.status(500).send({ 
+            }else{
 
-            message: "Internal Server Error!" + error
-        });
-      }
+              const user = await User.findOne({ email: req.body.data.email });
+              const token = user.generateAuthToken();
+
+              console.log("User login: ", user);
+          
+              res.cookie('token', token, {
+                  sameSite: 'none',
+                  path: '/',
+                  maxAge: 60*1000,
+                  httpOnly: true,
+                  secure: true
+              });
+
+              res.cookie('username', `${user.firstName} ${user.lastName}`, {
+                  sameSite: 'none',
+                  path: '/',
+                  maxAge: 60*1000,
+                  secure: true
+              });
+
+              res.cookie('email', user.email, {
+                  sameSite: 'none',
+                  path: '/',
+                  maxAge: 60*1000,
+                  secure: true
+              });
+          
+              res.status(200).send({
+                  data: token,
+                  email: user.email,
+                  username: `${user.firstName} ${user.lastName}`,
+                  message: "Đăng nhập thành công",
+              });
+          }
+
+        } catch (error) {
+
+            console.log("Login Server Error: ",error);
+
+            res.status(500).send({ 
+
+                message: "Internal Server Error!" + error
+            });
+        }
     };
   
 
     store = async (req, res, next)=>{
           
-      try{
+        try{
 
-        const salt = bcrypt.genSaltSync(Number(process.env.SALT));
-        const hashPassword = bcrypt.hashSync(req.body.password, salt);
-        const isPasswordValid = bcrypt.compareSync(req.body.password, hashPassword);
-        await new User({ ...req.body, password: hashPassword }).save();
-  
-        res.status(201).send({ 
+            const salt = bcrypt.genSaltSync(Number(process.env.SALT));
+            const hashPassword = bcrypt.hashSync(req.body.password, salt);
+            const isPasswordValid = bcrypt.compareSync(req.body.password, hashPassword);
+            await new User({ ...req.body, password: hashPassword }).save();
       
-            message: "User created successfully"
-        });
+            res.status(201).send({ 
+          
+                message: "User created successfully"
+            });
 
-      }catch (error){
+        }catch (error){
 
-        console.log("Register Server Error: ",error);
+            console.log("Register Server Error: ",error);
 
-        res.status(500).send({ 
+            res.status(500).send({ 
 
-            message: "Internal Server Error!" + error
-        });
-      }
+                message: "Internal Server Error!" + error
+            });
+        }
     }
 
 }

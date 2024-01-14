@@ -24,27 +24,26 @@ class adminController {
 
 
     store = async (req, res, next)=>{
-          
-      try{
+            
+        try{
+            const salt = bcrypt.genSaltSync(Number(process.env.SALT));
+            const hashPassword = bcrypt.hashSync(req.body.password, salt);
+            const isPasswordValid = bcrypt.compareSync(req.body.password, hashPassword);
+            await new Admin({ ...req.body, password: hashPassword }).save();
 
-        const salt = bcrypt.genSaltSync(Number(process.env.SALT));
-        const hashPassword = bcrypt.hashSync(req.body.password, salt);
-        const isPasswordValid = bcrypt.compareSync(req.body.password, hashPassword);
-        await new Admin({ ...req.body, password: hashPassword }).save();
+            console.log("Tao thanh cong mot tai khoan admin");
 
-        console.log("Tao thanh cong mot tai khoan admin");
+            res.redirect('/create?join=admin');
 
-        res.redirect('/create?join=admin');
+        }catch (error){
 
-      }catch (error){
+            console.log("Admin Register Server Error: ", error);
 
-        console.log("Admin Register Server Error: ", error);
+            res.status(500).send({ 
 
-        res.status(500).send({ 
-
-            message: `Admin Register Server Error: ${error}`
-        });
-      }
+                message: `Admin Register Server Error: ${error}`
+            });
+        }
     }
 
 }
