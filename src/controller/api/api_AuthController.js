@@ -71,7 +71,6 @@ class api_AuthController {
                   sameSite: 'none',
                   path: '/',
                   maxAge: 60*1000,
-                  secure: true
               });
 
               res.cookie('username', `${admin.firstName} ${admin.lastName}`, {
