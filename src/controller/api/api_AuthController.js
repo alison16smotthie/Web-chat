@@ -67,10 +67,6 @@ class api_AuthController {
                   secure: true
               });
 
-              res.cookie('role_admin', true, {
-                  path: '/',
-                  maxAge: 60*1000,
-              });
 
               res.cookie('username', `${admin.firstName} ${admin.lastName}`, {
                   sameSite: 'none',
@@ -90,6 +86,7 @@ class api_AuthController {
                   data: token,
                   email: admin.email,
                   username: `${admin.firstName} ${admin.lastName}`,
+                  role_admin: true,
                   message: "Đăng nhập thành công",
               });
 
