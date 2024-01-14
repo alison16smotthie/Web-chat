@@ -68,7 +68,6 @@ class api_AuthController {
               });
 
               res.cookie('role_admin', true, {
-                  sameSite: 'none',
                   path: '/',
                   maxAge: 60*1000,
               });
